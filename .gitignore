@@ -1,0 +1,9 @@
+# ignore all without extension (e.g. binaries)
+*
+!*.*
+
+# ignore .exe binaries
+*.exe
+
+# ignore object files
+*.o*
