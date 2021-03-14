@@ -1,6 +1,11 @@
-# ignore all without extension (e.g. binaries)
+# ignore all
 *
+
+# unignore all without extensions
 !*.*
+
+# unignore dirs
+!*/
 
 # ignore .exe binaries
 *.exe
