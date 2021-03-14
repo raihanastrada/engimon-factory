@@ -1,4 +1,8 @@
 // skill header
+
+#ifndef __SKILL_H
+#define __SKILL_H
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -20,3 +24,5 @@ public:
 	void setBasePower(int _base_power);
 	void setMasteryLevel(int _mastery_level);
 };
+
+#endif
