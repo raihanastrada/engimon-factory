@@ -28,8 +28,6 @@ First engimon type with elements Ground
 */
 
 class Engidex {
-    private:
-        vector<Species> codex;
     public:
         class Species {
             private:
@@ -42,7 +40,7 @@ class Engidex {
 
                 string getSpeciesName();
                 int getEngidexID();
-        }
+        };
 
         Engidex();
         
@@ -51,15 +49,22 @@ class Engidex {
         static void addSpecies(string name, int firstElement, int secondElement);
         static void addSpecies(string name, int firstElement);
         static void getSpecies(int code);
-}
 
+    private:
+        vector<Species> codex;
+};
+
+/*
+Relasi inheritance IS A,
+Engimon bernama "PikaPika" dengan spesies "Pikachu" maka, PikaPika(child, engimon) IS A Pikachu(parent, species)
+*/
 
 class Engimon : public Engidex::Species {
     private:
         int             id;
         string          name;
-        Engimon[2]      parents;
-        Skill[4]        skills;
+        Engimon*        parents[2];
+        Skill           skills[4];
         int             exp;
         bool            alive;
 
@@ -83,11 +88,11 @@ class Engimon : public Engidex::Species {
         };
 
         /* GETTERS */
-        bool    getAlive();             { return alive; };
-        string  getName();              { return name; };
+        bool    getAlive()              { return alive; };
+        string  getName()               { return name; };
         int     getLevel()              { return exp / 100; };
-        int     getExp();               { return exp % 100; };
-        int     getCumulativeExp();     { return exp; };
+        int     getExp()                { return exp % 100; };
+        int     getCumulativeExp()      { return exp; };
 
         /* BASIC FUNCTIONS */
         void addExp(int new_exp)
@@ -106,7 +111,7 @@ class Engimon : public Engidex::Species {
             Print(name);
         };
 
-        addSkill(Skill newSkill);      
+        void addSkill(Skill newSkill);      
 
         /* FRIEND FUNCTIONS */
         friend Engimon breed(Engimon dad, Engimon mom); // for breeding
