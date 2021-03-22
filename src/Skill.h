@@ -3,7 +3,7 @@
 #ifndef __SKILL_H
 #define __SKILL_H
 
-#include <bits/stdc++.h>
+#include <stdio.h>
 using namespace std;
 
 class Skill{
