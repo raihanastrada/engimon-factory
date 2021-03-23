@@ -3,40 +3,50 @@
 using namespace std;
 
 //Ctor
-Inventory::Inventory(){
+template<typename T>
+Inventory<T>::Inventory(){
     totalObject = 0;
 }
 
-//Add Skill ke inventory
-void Inventory::addSkill(Skill S){
+//Insert item ke inventory
+template<typename T>
+void Inventory<T>::insertItem(T item){
     if (totalObject < CAPACITY)
     {
-        skillInventory[S]++;
-        totalObject++;
+        itemInventory[item]++;
+        totalItem++;
     }
     else
     {
-        cout << "Inventory Penuh, tidak bisa menambah Skill" << endl;
-    }
+        cout << "Imventory Penuh" << endl;
+    }    
 }
 
-//Add Engimon ke inventory
-void Inventory::addEngimon(Engimon E){
-    if (totalObject < CAPACITY)
+//Get item from inventory
+template<typename T>
+T Inventory<T>::getItem(T item){
+    if (itemInventory.count(item))
     {
-        engimonInventory[E]++;
-        totalObject++;
+        itemInventory[item]--;
+        totalItem--;
+        if (itemInventory.at(item) == 0) //jika value / jumlah di key == item adalah 0, hapus item dari inventory
+        {
+            itemInventory.erase(item);
+        }            
+        return item;
     }
-    else
+    else //item not found
     {
-        cout << "Inventory Penuh, tidak bisa menambah Engimon" << endl;
-    }
+        return NULL;
+    }  
 }
 
-//Get jumlah objek dalam inventory
-int Inventory::numOfObject(){
-    return totalObject;
+//Get jumlah item dalam inventory
+template<typename T>
+int Inventory<T>::numOfItem(){
+    return totalItem;
 }
 
 //Dtor
-Inventory::~Inventory(){}
+template<typename T>
+Inventory<T>::~Inventory(){}
