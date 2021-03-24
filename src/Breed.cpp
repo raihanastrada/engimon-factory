@@ -92,17 +92,17 @@ Engimon Engimon::breed(Engimon dad, Engimon mom) {
 			current_skill++;
 		}
 	}
+	// sort skill yang kebuang berdasarkan mastery level
+	sort(temp.rbegin(),temp.rend());
 	
 	// Cek mastery level skill, ganti dengan skill yang sudah terbuang kalau lebih besar
 	for (int i=1;i<slotted_skill;i++) {
-		for (int j=1;j<temp_size;j++) {
-			if (anak.skills[i] < temp[j]) {
-				Skill swap();
-				swap = anak.skills[i];
-				anak.skills[i] = temp[i];
-				temp[i] = swap;
-				break;
-			}
+		if (anak.skills[i] < temp[0]) {
+			Skill swap();
+			swap = anak.skills[i];
+			anak.skills[i] = temp[0];
+			temp[0] = swap;
+			sort(temp.rbegin(),temp.rend());
 		}
 	}
 	
