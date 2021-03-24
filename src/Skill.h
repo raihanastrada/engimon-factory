@@ -15,7 +15,7 @@ private:
 	int base_power;
 	int mastery_level;
 	vector<Element> compatible_Element; // diasumsikan boleh pake STL di class skill
-	static int curr_id = 0; // id skill mulai dari nol
+	static int curr_id; // id skill mulai dari nol
 public:
 	// default ctor, id skill hasil default ctor -1
 	Skill();
@@ -42,7 +42,7 @@ public:
 	void setCompatibleElement(vector<Element> _compatible_Element);
 
 	// print info
-	void PrintInfo();
+	// void PrintInfo();
 };
 
 #endif

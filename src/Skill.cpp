@@ -2,13 +2,15 @@
 #include "Skill.h"
 using namespace std;
 
+int Skill::curr_id = 0;
+
 Skill::Skill() : id(-1), base_power(0), mastery_level(0) {}
 
 Skill::Skill(int _base_power, int _mastery_level, vector<Element> _compatible_Element){
 	this->base_power = _base_power;
 	this->mastery_level = _mastery_level;
 	this->compatible_Element = _compatible_Element; // vector punya assignment op
-	this->id = _id;
+	this->id = curr_id;
 	curr_id++;
 }
 
@@ -24,7 +26,7 @@ Skill& Skill::operator=(Skill &other){
 	this->mastery_level = other.mastery_level;
 	this->compatible_Element = other.compatible_Element;
 	this->id = other.id;
-	return this;
+	return *this;
 }
 
 bool Skill::operator==(Skill &other){
@@ -43,7 +45,7 @@ int Skill::getMasteryLevel() const{
 	return mastery_level;
 }
 
-vector<Element> getCompatibleElement() const{
+vector<Element> Skill::getCompatibleElement() const{
 	return compatible_Element;
 }
 
@@ -55,11 +57,11 @@ void Skill::setMasteryLevel(int _mastery_level){
 	mastery_level = _mastery_level;
 }
 
-void setCompatibleElement(vector<Element> _compatible_Element){
+void Skill::setCompatibleElement(vector<Element> _compatible_Element){
 	this->compatible_Element = _compatible_Element;
 }
 
-void printInfo(){
+/*void printInfo(){
 	cout << "base power: " << this->base_power << "\n";
 	cout << "mastery level: " << this->mastery_level << "\n";
 	cout << "compatible element: {";
@@ -70,4 +72,4 @@ void printInfo(){
 		cout << e.getElementName();
 	}
 	cout << "\n";
-}
+}*/
