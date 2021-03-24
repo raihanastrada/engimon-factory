@@ -9,7 +9,7 @@ using namespace std;
 
 int Peta::turn = 0;
 
-Peta::Peta(string filename, int _engimonCount, Player _player) : minLvl(int _minLvl) {
+Peta::Peta(string filename, int _engimonCount, Player _player, int _minLvl) : minLvl(_minLvl) {
     // open file
     ifstream readfile(filename);
     if (readfile.fail())
@@ -29,13 +29,12 @@ Peta::Peta(string filename, int _engimonCount, Player _player) : minLvl(int _min
             {
                 if (line[j] == '-')
                 {
-                    Cell cell Cell(line[j], "grassland", NULL);
+                    setCell(line[j], "grassland", NULL, i, j);
                 }
                 else
                 {
-                    Cell cell Cell(line[j], "ocean", NULL);
+                    setCell(line[j], "ocean", NULL, i, j);
                 }
-                setCell(cell,i,j);
             }
             i++;
         }
@@ -81,12 +80,18 @@ int Peta::getEngimonY() {
     return this->player.getEngimonLocation().GetY();
 }
 
-void Peta::setCell(Cell _cell, int i, int j) {
-    if (i < 0 || i > 9 || j < 0 || j > 11)
+void Peta::setCell(char view, string type, Engimon* engimon, int i, int j) {
+    try
     {
-        throw "invalid index";
+        Cell cell = getCell(i,j);
+        cell.setView(view);
+        cell.setType(type);
+        cell.setEngimon(engimon);
     }
-    cell[i][j] = _cell;
+    catch(string e)
+    {
+        cout << "error: " << e << endl;
+    }
 }
 void Peta::setEngimonCount(int count) {
     this->engimonCount = count;

@@ -19,7 +19,7 @@ class Peta
         
     public:
         /* Ctor */
-        Peta(string filename, int engimonCount, Player player);
+        Peta(string filename, int engimonCount, Player player, int _minLvl);
         /* Dtor */
         ~Peta();
         
@@ -34,7 +34,7 @@ class Peta
 
         // Setter
         /* Set cell pada Cell[i][j] */
-        void setCell(Cell cells, int i, int j);
+        void setCell(char view, string type, Engimon* engimon, int i, int j);
         void setEngimonCount(int count);
         void increaseTurn();
 
