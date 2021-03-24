@@ -79,7 +79,7 @@ Engimon Engimon::breed(Engimon dad, Engimon mom) {
 		current_skill++;
 	}
 	
-	// Cek mastery level skill, ganti dengan skill ibu kalau lebih besar
+	// Cek mastery level skill, ganti current skill dengan skill ibu kalau mastery current lebih kecil
 	vector<Skill> temp;
 	for (int i=1;i<4;i++) {
 		current_skill = 1;
@@ -92,17 +92,15 @@ Engimon Engimon::breed(Engimon dad, Engimon mom) {
 			current_skill++;
 		}
 	}
-	// sort skill yang kebuang berdasarkan mastery level
-	sort(temp.rbegin(),temp.rend());
 	
-	// Cek mastery level skill, ganti dengan skill yang sudah terbuang kalau lebih besar
+	// Cek mastery level skill, swap current skill dengan skill yang sudah terbuang kalau mastery current lebih kecil
 	for (int i=1;i<slotted_skill;i++) {
+		sort(temp.rbegin(),temp.rend());
 		if (anak.skills[i] < temp[0]) {
 			Skill swap();
 			swap = anak.skills[i];
 			anak.skills[i] = temp[0];
 			temp[0] = swap;
-			sort(temp.rbegin(),temp.rend());
 		}
 	}
 	
