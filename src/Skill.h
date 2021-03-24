@@ -28,6 +28,8 @@ public:
 
 	// comparator equal
 	bool operator==(Skill &other);
+	// comparator less
+	bool operator<(Skill &other);
 
 	// getter
 	int getBasePower() const;

@@ -31,6 +31,10 @@ bool Skill::operator==(Skill &other){
 	return this->id == other.id;
 }
 
+bool Skill::operator<(Skill &other){
+	return this->mastery_level < other.mastery_level;
+}
+
 int Skill::getBasePower() const{
 	return base_power;
 }
