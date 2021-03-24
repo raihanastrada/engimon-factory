@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Engimon Engimon::breed(Engimon dad, Engimon mom) {
+Engimon breed(Engimon dad, Engimon mom) {
 	if (dad.id == mom.id) {
 		throw false; // exception bikin anak ma diri sendiri
 	}
