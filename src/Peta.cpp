@@ -1,9 +1,12 @@
 #include "Peta.h"
 #include "Player.h"
 #include "Engimon.hpp"
+#include "Elements.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <experimental/random>
+#include <math.h>
 
 using namespace std;
 
@@ -27,14 +30,12 @@ Peta::Peta(string filename, int _engimonCount, Player _player, int _minLvl) : mi
             int j;
             for (j = 0; j < 10; j++)
             {
-                if (line[j] == '-')
+                Cell c;
+                if (line[j] == 'o')
                 {
-                    setCell(line[j], "grassland", NULL, i, j);
+                    c.setView(line[j]);
                 }
-                else
-                {
-                    setCell(line[j], "ocean", NULL, i, j);
-                }
+                cell[i][j] = c;
             }
             i++;
         }
@@ -46,16 +47,16 @@ Peta::Peta(string filename, int _engimonCount, Player _player, int _minLvl) : mi
 }
 
 Peta::~Peta() {
-    if(cell != NULL) {
-        for(int i = 0; i < 10; ++i) {
-            delete[] cell[i];   
-        }
-        delete[] cell;
-    }
+    // if(cell != NULL) {
+    //     for(int i = 0; i < 10; ++i) {
+    //         delete[] cell[i];   
+    //     }
+    //     delete[] cell;
+    // }
 }
         
 Cell Peta::getCell(int i, int j) {
-    if (i < 0 || i > 9 || j < 0 || j > 11)
+    if (isValidIdx(i,j))
     {
         throw "invalid index";
     }
@@ -80,13 +81,11 @@ int Peta::getEngimonY() {
     return this->player.getEngimonLocation().GetY();
 }
 
-void Peta::setCell(char view, string type, Engimon* engimon, int i, int j) {
+void Peta::setCell(Cell c, int i, int j) {
     try
     {
         Cell cell = getCell(i,j);
-        cell.setView(view);
-        cell.setType(type);
-        cell.setEngimon(engimon);
+        cell = c;
     }
     catch(string e)
     {
@@ -102,6 +101,7 @@ void Peta::increaseTurn() {
 
 void Peta::viewmap() {
     int i,j;
+    char c;
     for(i = 0; i < 10; i++)
     {
         for (j = 0; j < 12; j++)
@@ -109,16 +109,16 @@ void Peta::viewmap() {
             if (j == getPlayerX() && i == getPlayerY())
             {
                 /* Jika lokasi player */
-                cout << "P";
+                cout << 'P';
             }
             else if (j == getEngimonX() && i == getEngimonY())
             {
                 /* Jika lokasi Active Engimon */
-                cout << "X";
+                cout << 'X';
             }
             else
             {
-                cell[i][j].show();
+                cell[i][j].show(this->minLvl);
                 if (j == 11)
                 {
                     cout << endl;
@@ -135,7 +135,7 @@ void Peta::information() {
     cout << "F/f: Fire engimon" << endl;
     cout << "G/g: Ground engimon" << endl;
     cout << "E/e: Electric engimon" << endl;
-    cout << "L/l: Fore/Electric engimon" << endl;
+    cout << "L/l: Fire/Electric engimon" << endl;
     cout << "S/s: Water/Ice engimon" << endl;
     cout << "N/n: Water/Ground engimon" << endl;
     cout << endl;
@@ -149,7 +149,24 @@ void Peta::randomMove() {
     if (turn%5 == 0)
     {
         /* Jika turn kelipatan 5 */
-        cout << "randomMove" << endl;
+        int i,j;
+        for(i = 0; i < 10; i++)
+        {
+            for (j = 0; j < 12; j++)
+            {
+                if (cell[i][j].getEngimon() != NULL)
+                {
+                    int rngI, rngJ;
+                    do
+                    {
+                        rngI = random(-1,1);
+                        rngJ = random(-1,1);
+                    } while (!isValidIdx(i+rngI,j+rngJ) && sqrt(pow(i-(i+rngI),2) + pow(j-(j+rngJ),2)) > 1 && !isValidMove(cell[i][j].getEngimon(),cell[i+rngI][j+rngJ]) && !isPlayers(i+rngI,j+rngJ));
+                    Cell c = getCell(rngI,rngJ);
+                    moveEngimon(cell[i][j],c);
+                }
+            }
+        }
     }
 }
 void Peta::spawnEnemy() {
@@ -157,5 +174,39 @@ void Peta::spawnEnemy() {
     {
         /* Cuma bisa spawn kalo masih ada jatah buat engimon */
         cout << "spawnEnemy" << endl;
+        this->engimonCount -= 1;
     }
+}
+void Peta::moveEngimon(Cell c1, Cell c2) {
+    c2.setEngimon(c1.getEngimon());
+    c1.setEngimon(NULL);
+}
+bool Peta::isValidMove(Engimon* engimon, Cell c) {
+    Element fire("Fire");
+    Element water("Water");
+    Element electric("Electric");
+    Element ground("Ground");
+    Element ice("Ice");
+    if (engimon->getElements().at(0) == water || engimon->getElements().at(1) == water || engimon->getElements().at(0) == ice || engimon->getElements().at(1) == ice)
+    {
+        if ( (engimon->getElements().at(0) == water && engimon->getElements().at(1) == ground) || (engimon->getElements().at(0) == ground && engimon->getElements().at(1) == water) )
+        {
+            return (c.getType() == "sea" || c.getType() == "grassland");
+        }
+        // Jika ada elemen es atau water, bisa berjalan di air
+        return c.getType() == "sea";
+    }
+    else
+    {
+        return c.getType() == "grassland";
+    }
+}
+bool Peta::isPlayers(int i, int j) {
+    return j != getPlayerX() && i != getPlayerY() && j != getEngimonX() && i != getEngimonY();
+}
+bool Peta::isValidIdx(int i, int j) {
+    return !(i < 0 || i > 9 || j < 0 || j > 11);
+}
+int Peta::random(int min, int max) {
+    experimental::randint(min, max);
 }

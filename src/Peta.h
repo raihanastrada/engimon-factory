@@ -4,7 +4,9 @@
 #include "Cell.h"
 #include "Player.h"
 #include "Engimon.hpp"
+#include "Elements.hpp"
 #include <string>
+#include <experimental/random>
 
 using namespace std;
 
@@ -34,7 +36,7 @@ class Peta
 
         // Setter
         /* Set cell pada Cell[i][j] */
-        void setCell(char view, string type, Engimon* engimon, int i, int j);
+        void setCell(Cell c, int i, int j);
         void setEngimonCount(int count);
         void increaseTurn();
 
@@ -47,6 +49,15 @@ class Peta
         void randomMove();
         /* Spawn engimon */
         void spawnEnemy();
+        /* Move engimon dari cell c1 ke cell c2 */
+        void moveEngimon(Cell c1, Cell c2);
+        /* Mengecek apakah engimon valid bergerak ke cell */
+        bool isValidMove(Engimon* engimon, Cell c);
+        /* Mengecek apakah ada player / engimon */
+        bool isPlayers(int i, int j);
+        /* Mengecek apakah index valid */
+        bool isValidIdx(int i, int j);
+        int random(int min, int max);
 };  
 
 #endif  
