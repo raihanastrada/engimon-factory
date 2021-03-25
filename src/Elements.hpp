@@ -20,7 +20,6 @@ class Element {
     private:
         static map<pair<Element, Element>, float> advantageIndex;
         string elementName;
-
     public:
         Element()
         {
@@ -38,6 +37,21 @@ class Element {
         {
             return a.elementName == b.elementName;
         };
+
+        friend bool operator<(Element a, Element b)
+        {
+            return a < b;
+        }
+
+        friend bool operator<(pair<Element, Element> a, pair<Element, Element> b)
+        {
+            if (a.first < b.first)
+            {
+                return true;
+            } else {
+                return a.second < b.second;
+            }
+        }
 
         friend void setAdvantage(Element a, Element b, float mult)
         {
