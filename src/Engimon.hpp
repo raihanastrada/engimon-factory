@@ -133,8 +133,8 @@ class Engidex {
             codex[id] = s;
         };
 
-        Species getSpecies(int code) const {
-            return codex.at(code);
+        Species getSpecies(int code) {
+            return codex[code];
         }
 
     private:
