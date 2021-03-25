@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -17,25 +18,37 @@ Mendapatkan
 
 class Element {
     private:
-        static vector<Element> elementDex;
-        static vector<vector<int>> advantageIndex;
-        static int elementCount;
-        int id;
+        static map<pair<Element, Element>, float> advantageIndex;
         string elementName;
 
     public:
-        Element();
+        Element(string elementname)
+        {
+            elementName = elementname;
+        };
+
         ~Element();
 
-        friend bool operator==(Element a, Element b);
+        friend bool operator==(Element a, Element b)
+        {
+            return a.elementName == b.elementName;
+        };
 
-        friend void setAdvantage(Element a, Element b);
-        friend void setAdvantage(int idA, int idB);
+        friend void setAdvantage(Element a, Element b, float mult)
+        {
+            advantageIndex[pair<Element, Element>(a, b)] = mult;
+        };
         
-        friend int getAdvantage(Element a, Element b);
-
-        static void addElementToGlobal(Element newElement);
-        static Element getElement(string elementName);
+        friend int getAdvantage(Element a, Element b)
+        {
+            pair<Element, Element> e(a,b);
+            if (advantageIndex.count(e) == 0)
+            {
+                return 1;
+            } else {
+                return advantageIndex[pair<Element, Element>(a,b)];
+            }
+        };
 };
 
 #endif

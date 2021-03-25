@@ -2,16 +2,39 @@
 #include "Skill.h"
 #include "Elements.hpp"
 
-// Initialize Elements
-/*
 
-*/
+void init()
+{
+    // Initialize Elements
+    /*
+        Element element("elementName");
+        Element element2("element2Name");
+        setAdvantage(element, element2);
+    */
 
-// Initialize Skills
+    Element fire("Fire");
+    Element water("Water");
+    Element electric("Electric");
+    Element ground("Ground");
+    Element ice("Ice");
 
-// Initialize Pokemons
-/*
-FORMAT:
-    name, id, skill, element 1, element 2 (optional) 
-*/
-// Engidex::addSpecies("Pikachoo", d);
+    setAdvantage(fire, water, 0);
+    setAdvantage(fire, ground, 0.5);
+    setAdvantage(fire, ice, 2);
+    
+    setAdvantage(water, fire, 2);
+
+    // WIP
+
+    // Initialize Pokemon Species
+    /*
+    FORMAT:
+        Skill skill(basepower, masterlevel, vector<Element> compatibleElement);
+        Engidex::addSpecies(name, id, skill, elementName) (you can use string for el name)
+    */
+
+    Skill shock(1, 1, vector<Element>() = { electric });
+    Engidex::addSpecies("Pikamee", 3001, shock, electric);
+}
+
+

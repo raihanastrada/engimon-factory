@@ -99,11 +99,24 @@ class Engidex {
             codex[id] = s;
         };
 
+        static void addSpecies(string name, int id, Skill u, string a1, string a2)
+        {
+            Species s(name, id, u, Element(a1), Element(a2));
+            codex[id] = s;
+        };
+
         static void addSpecies(string name, int id, Skill u, Element a1)
         {
             Species s(name, id, u, a1);
             codex[id] = s;
         }
+
+        static void addSpecies(string name, int id, Skill u, string a1)
+        {
+            Species s(name, id, u, Element(a1));
+            codex[id] = s;
+        }
+
         static Species getSpecies(int code);
 
     private:
