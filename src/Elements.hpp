@@ -55,12 +55,12 @@ class Element {
             }
         }
 
-        friend void setAdvantage(Element a, Element b, float mult)
+        friend static void setAdvantage(Element a, Element b, float mult)
         {
             advantageIndex.insert(make_pair(make_pair(a, b), mult));
         };
         
-        friend float getAdvantage(Element a, Element b)
+        friend static float getAdvantage(Element a, Element b)
         {
             pair<Element, Element> e (a,b);
             if (advantageIndex.count(e) == 0)
@@ -71,14 +71,14 @@ class Element {
             }
         };
 
-        friend float getAdvantage(vector<Element> a, vector<Element>b)
+        friend static float getAdvantage(vector<Element> a, vector<Element>b)
         {
             float max = -1;
             if (a.size() != 0 && b.size() != 0)
             {
-                for (auto &i: a)
+                for (Element &i: a)
                 {   
-                    for (auto &j: b)
+                    for (Element &j: b)
                     {
                         if (getAdvantage(i, j) > max)
                         {
