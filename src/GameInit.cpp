@@ -155,8 +155,8 @@ void GameInitiator::generatePokemon()
     addNewEntry(2009, "Nekomata Okayu", "Mogu Mogu");
 
     addNewEntry(3001, "Amelia Watson", "Ground Pound");
-    addNewEntry(3002, "Inugami Korone", "Yubi");
-    addNewEntry(3003, "Usada Pekora", "Commit War Crimes");
+    addNewEntry(3002, "Yubi, Inugami Korone", "Yubi");
+    addNewEntry(3003, "Peko, Usada Pekora", "Commit War Crimes");
     addNewEntry(3004, "Uruha Rushia", "Desk Slam");
     addNewEntry(3005, "Shiranui Flare", "Arrow");
     addNewEntry(3006, "Noel", "Bonk");
@@ -167,7 +167,7 @@ void GameInitiator::generatePokemon()
     addNewEntry(4001, "Amane Kanata", "Icicle");
     addNewEntry(4002, "Tokoyami Towa", "Devil's Snare");
     addNewEntry(4003, "Himemori Luna", "Summon Ice Knight");
-    addNewEntry(4004, "Yukihana Lamy", "Ramy");
+    addNewEntry(4004, "Lamy, Yukihana Lamy", "Ramy");
     addNewEntry(4005, "Momosuzu Nene", "Summon NAVY Seal Team Six");
     addNewEntry(4006, "Shishiro Botan", "Snipe");
     addNewEntry(4007, "Omaru Polka", "Snow Circus");
@@ -185,7 +185,7 @@ void GameInitiator::generatePokemon()
     addNewEntry(5009, "Rikka", "Wet");
 
 
-    addNewEntry(1301, "More Calliope", "Magnetize");
+    addNewEntry(1301, "Mori Calliope", "Magnetize");
     addNewEntry(1302, "Moona Hoshinova", "Gravitate");
     addNewEntry(1303, "Airani Iofifteen", "Paint");
     addNewEntry(1304, "Kureiji Ollie", "Resurrect");
@@ -195,7 +195,7 @@ void GameInitiator::generatePokemon()
     addNewEntry(1308, "Civia", "Summon '93 Honda Civic");
     addNewEntry(1309, "Pepsi Man", "Is Pepsi Ok?");
 
-    addNewEntry(5301, "Oozora Subaru", "Shuba");
+    addNewEntry(5301, "Suba, Oozora Subaru", "Shuba");
     addNewEntry(5302, "Minato Aqua", "Onionize");
     addNewEntry(5303, "Ayunda Risu", "N U T");
     addNewEntry(5304, "Kagami Kira", "Die");
