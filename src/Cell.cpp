@@ -1,6 +1,8 @@
 #include "Cell.h"
 #include "Engimon.hpp"
+#include "Elements.hpp"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -17,6 +19,12 @@ Cell::Cell(char view, string type, Engimon* _engimon) {
 }
 Cell::~Cell() {
     delete engimon;
+}
+Cell& Cell::operator=(const Cell& c) {
+    this->view = c.view;
+    this->type = c.type;
+    engimon = c.engimon;
+    return *this;
 }
 char Cell::getView() {
     return this->view;
@@ -36,7 +44,7 @@ void Cell::setType(string type) {
 void Cell::setEngimon(Engimon* _engimon) {
     engimon = _engimon;
 }
-void Cell::show() {
+void Cell::show(int minLvl) {
     if (engimon == NULL) 
     {
         // Jika tidak terdapat engimon
@@ -45,6 +53,43 @@ void Cell::show() {
     else 
     {
         // Tampilkan berdasarkan engimon
-        cout << "E"; // Temporary
+        char c = this->engimonView();
+        if (engimon->getLevel() > minLvl)
+        {
+            c = toupper(c);
+        }
+        cout << c;
+    }
+}
+char Cell::engimonView() {
+    Element fire("Fire");
+    Element water("Water");
+    Element electric("Electric");
+    Element ground("Ground");
+    Element ice("Ice");
+    if (engimon->getElements().at(0) == fire)
+    {
+        if (engimon->getElements().at(1) == electric){return 'l';}
+        else{return 'f';}
+    }
+    else if (engimon->getElements().at(0) == water)
+    {
+        if (engimon->getElements().at(1) == ice){return 's';}
+        else if (engimon->getElements().at(1) == ground){return 'n';}
+        else{return 'w';}
+    }
+    else if (engimon->getElements().at(0) == ice)
+    {
+        if (engimon->getElements().at(1) == water){return 's';}
+        else{return 'i';}
+    }
+    else if (engimon->getElements().at(0) == ground)
+    {
+        if (engimon->getElements().at(1) == water){return 'n';}
+        else{return 'g';}
+    }
+    else{
+        if (engimon->getElements().at(1) == fire) {return 'l';}
+        else {return'e';}
     }
 }

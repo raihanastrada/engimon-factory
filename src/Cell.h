@@ -18,6 +18,8 @@ class Cell
         Cell(char view, string type, Engimon* engimon);
         /* Dtor */
         ~Cell();
+        /* Operator assignment */
+        Cell& operator=(const Cell& c);
 
         /* Getter */
         char getView();
@@ -31,7 +33,8 @@ class Cell
 
         /* Method */
         /* Menampilkan tampilan cell pada terminal */
-        void show();
+        void show(int minLvl);
+        char engimonView();
 };
 
 #endif
