@@ -53,7 +53,7 @@ class Element {
 
         friend void setAdvantage(Element a, Element b, float mult)
         {
-            advantageIndex[make_pair(a, b)] = mult;
+            advantageIndex.insert(make_pair(make_pair(a, b), mult));
         };
         
         friend float getAdvantage(Element a, Element b)
