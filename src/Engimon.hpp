@@ -235,6 +235,10 @@ class Engimon : public Engidex::Species {
             }
         };   
 
+        vector<Skill> getSkills(){
+            return skills;
+        }
+
         /* OPERATORS */
         bool operator==(Engimon comp) { return id == comp.id; };
 
