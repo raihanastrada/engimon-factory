@@ -56,7 +56,8 @@ class Engidex {
                 Species(int id)
                 {
                     Species spec = defaultEngidex.getSpecies(id);
-
+                    // cout << spec.species_name << endl;
+                    // cout << "__________SLDKFJSLDKJFLSDKJFLSDKJF____________" << endl;
                     species_name = spec.species_name;
                     species_id = spec.species_id;
                     uniqueSkill = spec.uniqueSkill;
@@ -79,6 +80,8 @@ class Engidex {
                     uniqueSkill = u;
                     elements.push_back(e1);
                     elements.push_back(e2);
+                    cout << "_-------------------_" << endl;
+                    cout << species_name << endl;
                 };
 
                 // Copy constructor
@@ -90,7 +93,10 @@ class Engidex {
                     elements = spec.elements;
                 }
 
-                void species_info_print();
+                void species_info_print() 
+                {
+                    cout << species_name << endl;
+                }
 
                 string getSpeciesName() { return species_name; };
                 int getEngidexID() { return species_id; };
@@ -128,7 +134,7 @@ class Engidex {
         };
 
         Species getSpecies(int code) const {
-            return codex[code];
+            return (*codex.find(code)).second;
         }
 
     private:
@@ -218,11 +224,12 @@ class Engimon : public Engidex::Species {
 
         void PrintInfo()
         {
-            cout << "Name     : " << name << endl;
-            for(auto &i : parents) {
-            cout << "Parent   : " << i->name << endl;
-            }
-            species_info_print();
+            // cout << "Name     : " << name << endl;
+            // for(auto &i : parents) {
+            // cout << "Parent   : " << i->name << endl;
+            // }
+            // species_info_print();
+            cout << getSpeciesName() << endl;
         };
 
         void addSkill(Skill newSkill)

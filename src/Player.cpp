@@ -67,9 +67,9 @@ void Player::SwitchActiveMenu() {
 }
 
 // Memperlihatkan isi Inventory Engimon TEST
-// void Player::PrintListEngimon() {
-//     InvE.PrintAll(); // ganti format method printall, semua item harus punya printinfo
-// }
+void Player::PrintListEngimon() {
+    InvE.PrintAll(); // ganti format method printall, semua item harus punya printinfo
+}
 
 // Memperlihatkan isi Inventory Skill Item
 void Player::PrintListSkillItem() {
