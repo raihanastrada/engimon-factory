@@ -105,6 +105,8 @@ Engidex GameInitiator::init()
     Engidex engidex;
     setEngidex(engidex);
 
+    generatePokemon();
+
     return e;
 }
 
