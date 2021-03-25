@@ -155,63 +155,65 @@ void GameInitiator::generatePokemon()
     addNewEntry(2009, "Nekomata Okayu", "Mogu Mogu");
 
     addNewEntry(3001, "Amelia Watson", "Ground Pound");
-    addNewEntry(3001, "Inugami Korone", "Yubi");
-    addNewEntry(3001, "Usada Pekora", "Commit War Crimes");
-    addNewEntry(3001, "Uruha Rushia", "Desk Slam");
-    addNewEntry(3001, "Shiranui Flare", "Arrow");
-    addNewEntry(3001, "Noel", "Bonk");
-    addNewEntry(3001, "Houshou Marine", "Horn");
-    addNewEntry(3001, "Kiryu Coco", "Tail Whip");
-    addNewEntry(3001, "Tsunomaki Watame", "Ram");
+    addNewEntry(3002, "Inugami Korone", "Yubi");
+    addNewEntry(3003, "Usada Pekora", "Commit War Crimes");
+    addNewEntry(3004, "Uruha Rushia", "Desk Slam");
+    addNewEntry(3005, "Shiranui Flare", "Arrow");
+    addNewEntry(3006, "Noel", "Bonk");
+    addNewEntry(3007, "Houshou Marine", "Horn");
+    addNewEntry(3008, "Kiryu Coco", "Tail Whip");
+    addNewEntry(3009, "Tsunomaki Watame", "Ram");
 
     addNewEntry(4001, "Amane Kanata", "Icicle");
-    addNewEntry(4001, "Tokoyami Towa", "Devil's Snare");
-    addNewEntry(4001, "Himemori Luna", "Summon Ice Knight");
-    addNewEntry(4001, "Yukihana Lamy", "Ramy");
-    addNewEntry(4001, "Momosuzu Nene", "Summon NAVY Seal Team Six");
-    addNewEntry(4001, "Shishiro Botan", "Snipe");
-    addNewEntry(4001, "Omaru Polka", "Snow Circus");
-    addNewEntry(4001, "Mano Aloe", "Ice Slumber");
-    addNewEntry(4001, "Pavolie Reine", "Ice Feather");
+    addNewEntry(4002, "Tokoyami Towa", "Devil's Snare");
+    addNewEntry(4003, "Himemori Luna", "Summon Ice Knight");
+    addNewEntry(4004, "Yukihana Lamy", "Ramy");
+    addNewEntry(4005, "Momosuzu Nene", "Summon NAVY Seal Team Six");
+    addNewEntry(4006, "Shishiro Botan", "Snipe");
+    addNewEntry(4007, "Omaru Polka", "Snow Circus");
+    addNewEntry(4008, "Mano Aloe", "Ice Slumber");
+    addNewEntry(4009, "Pavolie Reine", "Ice Feather");
 
     addNewEntry(5001, "Gawr Gura", "Splash");
-    addNewEntry(5001, "Spade Echo", "Wave");
-    addNewEntry(5001, "Doris", "Dive");
-    addNewEntry(5001, "Rosalyn", "Vortex");
-    addNewEntry(5001, "Artia", "Funnel");
-    addNewEntry(5001, "Hanasaki Miyabi", "Tsunami");
-    addNewEntry(5001, "Kanade Izuru", "Spit");
-    addNewEntry(5001, "Arurandeisu", "Drink");
-    addNewEntry(5001, "Rikka", "Wet");
+    addNewEntry(5002, "Spade Echo", "Wave");
+    addNewEntry(5003, "Doris", "Dive");
+    addNewEntry(5004, "Rosalyn", "Vortex");
+    addNewEntry(5005, "Artia", "Funnel");
+    addNewEntry(5006, "Hanasaki Miyabi", "Tsunami");
+    addNewEntry(5007, "Kanade Izuru", "Spit");
+    addNewEntry(5008, "Arurandeisu", "Drink");
+    addNewEntry(5009, "Rikka", "Wet");
 
 
     addNewEntry(1301, "More Calliope", "Magnetize");
-    addNewEntry(1301, "Moona Hoshinova", "Gravitate");
-    addNewEntry(1301, "Airani Iofifteen", "Paint");
-    addNewEntry(1301, "Kureiji Ollie", "Resurrect");
-    addNewEntry(1301, "Anya Melfissa", "Blade Slash");
-    addNewEntry(1301, "Ninomae Ina'nis", "Call Upon The Ancient One");
-    addNewEntry(1301, "Yogiri", "Fire and Electric Attack 1");
-    addNewEntry(1301, "Civia", "Summon '93 Honda Civic");
+    addNewEntry(1302, "Moona Hoshinova", "Gravitate");
+    addNewEntry(1303, "Airani Iofifteen", "Paint");
+    addNewEntry(1304, "Kureiji Ollie", "Resurrect");
+    addNewEntry(1305, "Anya Melfissa", "Blade Slash");
+    addNewEntry(1306, "Ninomae Ina'nis", "Call Upon The Ancient One");
+    addNewEntry(1307, "Yogiri", "Fire and Electric Attack 1");
+    addNewEntry(1308, "Civia", "Summon '93 Honda Civic");
+    addNewEntry(1309, "Pepsi Man", "Is Pepsi Ok?");
 
     addNewEntry(5301, "Oozora Subaru", "Shuba");
-    addNewEntry(5301, "Minato Aqua", "Onionize");
-    addNewEntry(5301, "Ayunda Risu", "N U T");
-    addNewEntry(5301, "Kagami Kira", "Die");
-    addNewEntry(5301, "Yakushiji Suzaku", "Call Dad");
-    addNewEntry(5301, "Astel Leda", "Leda Attack");
-    addNewEntry(5301, "Kishido Temma", "Temma Attack");
-    addNewEntry(5301, "Yukoku Roberu", "Win");
+    addNewEntry(5302, "Minato Aqua", "Onionize");
+    addNewEntry(5303, "Ayunda Risu", "N U T");
+    addNewEntry(5304, "Kagami Kira", "Die");
+    addNewEntry(5305, "Yakushiji Suzaku", "Call Dad");
+    addNewEntry(5306, "Astel Leda", "Leda Attack");
+    addNewEntry(5307, "Kishido Temma", "Temma Attack");
+    addNewEntry(5308, "Yukoku Roberu", "Win");
+    addNewEntry(5309, "Milk Man", "Deliver Milk");
 
     addNewEntry(5401, "Amatsuka Uto", "Angle Supreme Freeze");
-    addNewEntry(5401, "Kageyama Shien", "Shien Freeze");
-    addNewEntry(5401, "Aragami Oga", "Oga Freeze");
-    addNewEntry(5401, "Tsukishita Kaoru", "Kaoru Freeze");
-    addNewEntry(5401, "Yagoo", "Open Gates to Heaven");
-    addNewEntry(5401, "AChan", "Sleep");
-    addNewEntry(5401, "Daidou Shinove", "Roll Dice");
-    addNewEntry(5401, "EnMa", "Slaughter");
-    addNewEntry(5401, "JenMa", "Sleep");
+    addNewEntry(5402, "Kageyama Shien", "Shien Freeze");
+    addNewEntry(5403, "Aragami Oga", "Oga Freeze");
+    addNewEntry(5404, "Tsukishita Kaoru", "Kaoru Freeze");
+    addNewEntry(5405, "Yagoo", "Open Gates to Heaven");
+    addNewEntry(5406, "AChan", "Sleep");
+    addNewEntry(5407, "Daidou Shinove", "Roll Dice");
+    addNewEntry(5408, "EnMa", "Slaughter");
+    addNewEntry(5409, "JenMa", "Sleep");
 
 }
 
