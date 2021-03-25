@@ -19,6 +19,11 @@ class Inventory {
             this->Inv = vector<pair<T, int>>();
             this->Count = 0;
         }
+        Inventory& operator=(const Inventory& other) {
+            this->Count = other.Count;
+            this->Inv = other.Inv;
+            return *this;
+        }
         ~Inventory() { // Destructor
             vector<pair<T, int>>().swap(this->Inv); // Menukar vector dengan vector kosong (membebaskan memory)
         }
