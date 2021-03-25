@@ -17,6 +17,7 @@ class Peta
         const int minLvl;           // Level minimum engimon agar ditampilkan huruf kecil
         int engimonCount;           // Batas engimon yang dapat di spawn
         Player player;              // Player, buat ngambil lokasi player
+        CatalogSkill catalogSkill;  // catalog skill [NOTE belum diconstruct]
         static int turn;            // Turn
         
     public:
@@ -58,6 +59,7 @@ class Peta
         /* Mengecek apakah index valid */
         bool isValidIdx(int i, int j);
         int random(int min, int max);
+        void battle();
 };  
 
 #endif  
