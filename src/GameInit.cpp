@@ -22,24 +22,24 @@ Engidex init()
     Element ground("Ground");
     Element ice("Ice");
 
-    // setAdvantage(fire, water, 0.0);
-    // setAdvantage(fire, ground, 0.5);
-    // setAdvantage(fire, ice, 2.0);
+    setAdvantage(fire, water, 0.0);
+    setAdvantage(fire, ground, 0.5);
+    setAdvantage(fire, ice, 2.0);
     
-    // setAdvantage(water, fire, 2.0);
-    // setAdvantage(water, electric, 0.0);
+    setAdvantage(water, fire, 2.0);
+    setAdvantage(water, electric, 0.0);
 
-    // setAdvantage(electric, water, 2.0);
-    // setAdvantage(electric, ground, 1.5);
-    // setAdvantage(electric, ice, 1.5);
+    setAdvantage(electric, water, 2.0);
+    setAdvantage(electric, ground, 1.5);
+    setAdvantage(electric, ice, 1.5);
 
-    // setAdvantage(ground, fire, 1.5);
-    // setAdvantage(ground, electric, 2.0);
-    // setAdvantage(ground, ice, 0.0);
+    setAdvantage(ground, fire, 1.5);
+    setAdvantage(ground, electric, 2.0);
+    setAdvantage(ground, ice, 0.0);
 
-    // setAdvantage(ice, fire, 0);
-    // setAdvantage(ice, electric, 0.5);
-    // setAdvantage(ice, ground, 2);
+    setAdvantage(ice, fire, 0);
+    setAdvantage(ice, electric, 0.5);
+    setAdvantage(ice, ground, 2);
 
     // Initialize Pokemon Species
     /*
@@ -49,7 +49,6 @@ Engidex init()
     */
 
     Engidex engidex;
-    // Engidex::Species::setDefaultEngidex(engidex);
 
     Skill shock(1, 1, vector<Element>() = { electric });
     engidex.addSpecies("Pikamee", 3001, shock, electric);

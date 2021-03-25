@@ -53,7 +53,7 @@ class Element {
 
         friend void setAdvantage(Element a, Element b, float mult)
         {
-            advantageIndex[pair<Element, Element>(a, b)] = mult;
+            advantageIndex[make_pair(a, b)] = mult;
         };
         
         friend float getAdvantage(Element a, Element b)
@@ -85,7 +85,6 @@ class Element {
             }
 
             return max;
-            
         }
 };
 

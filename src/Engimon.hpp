@@ -50,9 +50,9 @@ class Engidex {
         class Species {
             private:
                 int species_id;
-                Skill uniqueSkill;
                 string species_name;
             protected:
+                vector<Skill> skills;
                 vector<Element> elements;
             public:
                 Species()
@@ -66,7 +66,7 @@ class Engidex {
                     Species spec = e.getSpecies(id);
                     species_name = spec.species_name;
                     species_id = spec.species_id;
-                    uniqueSkill = spec.uniqueSkill;
+                    skills = spec.skills;
                     elements = spec.elements;
                 };
 
@@ -75,7 +75,7 @@ class Engidex {
                 {
                     species_name = nm;
                     species_id = id;
-                    uniqueSkill = u;
+                    skills.push_back(u);
                     elements.push_back(e1);
                 };
 
@@ -83,7 +83,7 @@ class Engidex {
                 {
                     species_name = nm;
                     species_id = id;
-                    uniqueSkill = u;
+                    skills.push_back(u);
                     elements.push_back(e1);
                     elements.push_back(e2);
                 };
@@ -93,7 +93,7 @@ class Engidex {
                 {
                     species_name = spec.species_name;
                     species_id = spec.species_id;
-                    uniqueSkill = spec.uniqueSkill;
+                    skills = spec.skills;
                     elements = spec.elements;
                 }
 
@@ -104,7 +104,7 @@ class Engidex {
 
                 string getSpeciesName() { return species_name; };
                 int getEngidexID() { return species_id; };
-                Skill getUniqueSkill() { return uniqueSkill; };
+                Skill getUniqueSkill() { return skills[0]; };
 
                 vector<Element> getElements() { return elements; };
 
@@ -161,7 +161,6 @@ class Engimon : public Engidex::Species {
         int                 id;
         string              name;
         vector<Engimon*>    parents;
-        vector<Skill>       skills;
         int                 exp;
         bool                alive;
 
