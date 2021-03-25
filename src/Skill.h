@@ -25,6 +25,8 @@ public:
 	Skill(const Skill &other);
 	// assignment op
 	Skill& operator=(const Skill &other);
+	// desktruktor
+	~Skill();
 
 	// comparator equal
 	friend bool operator==(Skill a, Skill b);

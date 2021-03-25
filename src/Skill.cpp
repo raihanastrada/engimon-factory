@@ -29,6 +29,10 @@ Skill& Skill::operator=(const Skill &other){
 	return *this;
 }
 
+Skill::~Skill() {
+	vector<Element>().swap(compatible_Element);
+}
+
 bool operator==(Skill a, Skill b){
 	return a.id == b.id;
 }
