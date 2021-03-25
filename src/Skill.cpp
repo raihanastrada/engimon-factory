@@ -104,12 +104,12 @@ void Skill::printInfo(){
 /* CatalogSkill */
 void CatalogSkill::addSkill(Skill s){
 	for (auto e : s.getCompatibleElement()){
-		catalog[e].push_back(s.get);
+		catalog[e].push_back(s);
 	}
 }
 
 Skill CatalogSkill::getRandomSkillByElement(Element e){
-	mt19937 rng(new char); // pseudo-random generator
+	mt19937 rng((unsigned long long) new char); // pseudo-random generator
 	int gacha = rng()%(int)catalog[e].size();
 	return catalog[e][gacha];
 }
