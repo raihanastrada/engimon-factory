@@ -97,6 +97,7 @@ pair<Engidex, CatalogSkill> GameInitiator::init()
     */
 
     vector<Element> elements;
+    elements.push_back(Element("dummy"));
     elements.push_back(electric);
     elements.push_back(fire);
     elements.push_back(ground);
