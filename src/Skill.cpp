@@ -2,11 +2,22 @@
 #include "Skill.h"
 using namespace std;
 
+/* Skill */
 int Skill::curr_id = 0;
 
 Skill::Skill() : id(-1), base_power(0), mastery_level(0) {}
 
-Skill::Skill(int _base_power, int _mastery_level, vector<Element> _compatible_Element){
+Skill::Skill(string _name, int _base_power, vector<Element> _compatible_Element){
+	this->name = _name;
+	this->base_power = _base_power;
+	this->mastery_level = 1;
+	this->compatible_Element = _compatible_Element; // vector punya assignment op
+	this->id = curr_id;
+	curr_id++;
+}
+
+Skill::Skill(string _name, int _base_power, int _mastery_level, vector<Element> _compatible_Element){
+	this->name = _name;
 	this->base_power = _base_power;
 	this->mastery_level = _mastery_level;
 	this->compatible_Element = _compatible_Element; // vector punya assignment op
@@ -15,6 +26,7 @@ Skill::Skill(int _base_power, int _mastery_level, vector<Element> _compatible_El
 }
 
 Skill::Skill(const Skill &other){
+	this->name = other.name;
 	this->base_power = other.base_power;
 	this->mastery_level = other.mastery_level;
 	this->compatible_Element = other.compatible_Element;
@@ -22,6 +34,7 @@ Skill::Skill(const Skill &other){
 }
 
 Skill& Skill::operator=(const Skill &other){
+	this->name = other.name;
 	this->base_power = other.base_power;
 	this->mastery_level = other.mastery_level;
 	this->compatible_Element = other.compatible_Element;
@@ -34,7 +47,7 @@ Skill::~Skill() {
 }
 
 bool operator==(Skill a, Skill b){
-	return a.id == b.id;
+	return a.name == b.name;
 }
 
 bool operator<(Skill a, Skill b){
@@ -86,4 +99,17 @@ void Skill::printInfo(){
 		cout << e.getName() << "\n";
 	}
 	cout << "\n";
+}
+
+/* CatalogSkill */
+void CatalogSkill::addSkill(Skill s){
+	for (auto e : s.getCompatibleElement()){
+		catalog[e].push_back(s.get);
+	}
+}
+
+Skill CatalogSkill::getRandomSkillByElement(Element e){
+	mt19937 rng(new char); // pseudo-random generator
+	int gacha = rng()%(int)catalog[e].size();
+	return catalog[e][gacha];
 }
