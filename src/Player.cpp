@@ -84,7 +84,12 @@ void Player::PrintListSkillItem() {
 
 // Interaksi dengan Active Engimon
 void Player::Interact() {
-
+    string name = ActiveEngimon->getName();
+    string slogan = "";
+    for (int i=0; i<min(4, (int)name.length()); i++) slogan.push_back(name[i]);
+    slogan += slogan;
+    
+    cout << '[' << name << "]: " << slogan << "\n";
 }
 
 // Print detail suatu Engimon (menampilkan nama parent beserta spesies mereka) serta seluruh atribut kelas
