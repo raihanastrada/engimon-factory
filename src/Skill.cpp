@@ -5,7 +5,7 @@ using namespace std;
 /* Skill */
 int Skill::curr_id = 0;
 
-Skill::Skill() : id(-1), base_power(0), mastery_level(0) {}
+Skill::Skill() : id(-1), base_power(0), mastery_level(0), name("Unknown") {}
 
 Skill::Skill(string _name, int _base_power, vector<Element> _compatible_Element){
 	this->name = _name;
@@ -88,17 +88,18 @@ bool Skill::isCompatible(vector<Element> _elements){
 	return false;
 }
 
-void Skill::printInfo(){
-	cout << "base power: " << this->base_power << "\n";
-	cout << "mastery level: " << this->mastery_level << "\n";
-	cout << "compatible element: {";
+void Skill::PrintInfo(){
+	cout << "\tName: " << this->name;
+	cout << "; Base Power: " << this->base_power;
+	cout << "; Mastery Level: " << this->mastery_level << "\n";
+	cout << "\tCompatible element: {";
 	bool first = 1;
 	for (Element &e : compatible_Element){
 		if (first) first = 0;
 		else cout << ",";
-		cout << e.getName() << "\n";
+		cout << e.getName();
 	}
-	cout << "\n";
+	cout << "}\n";
 }
 
 /* CatalogSkill */

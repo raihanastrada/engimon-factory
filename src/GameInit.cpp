@@ -50,7 +50,7 @@ Engidex init()
 
     Engidex engidex;
 
-    Skill shock(1, 1, vector<Element>() = { electric });
+    Skill shock("100Volt", 1, 1, vector<Element>() = { electric });
     engidex.addSpecies("Pikamee", 3001, shock, electric);
     
     return engidex;
