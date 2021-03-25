@@ -47,7 +47,7 @@ public:
 	bool isCompatible(vector<Element> _elements);
 
 	// print info
-	void PrintInfo();
+	void printInfo();
 };
 
 #endif

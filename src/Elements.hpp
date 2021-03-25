@@ -31,6 +31,10 @@ class Element {
             elementName = elementname;
         };
 
+        string getName(){
+            return elementName;
+        }
+
         friend bool operator==(Element a, Element b)
         {
             return a.elementName == b.elementName;

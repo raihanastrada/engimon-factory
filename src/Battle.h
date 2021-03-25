@@ -8,6 +8,7 @@
 #include <bits/stdc++.h>
 #include "Engimon.hpp"
 #include "Elements.hpp"
+#include "Skill.h"
 using namespace std;
 
 // contoh pemakaian:

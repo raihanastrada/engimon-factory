@@ -75,7 +75,7 @@ bool Skill::isCompatible(vector<Element> _elements){
 	return false;
 }
 
-/*void printInfo(){
+void Skill::printInfo(){
 	cout << "base power: " << this->base_power << "\n";
 	cout << "mastery level: " << this->mastery_level << "\n";
 	cout << "compatible element: {";
@@ -83,11 +83,7 @@ bool Skill::isCompatible(vector<Element> _elements){
 	for (Element &e : compatible_Element){
 		if (first) first = 0;
 		else cout << ",";
-		cout << e.getElementName();
+		cout << e.getName() << "\n";
 	}
 	cout << "\n";
-}*/
-
-void Skill::PrintInfo() {
-	cout << "Base Power: " << this->base_power << endl; // TESTing
 }
