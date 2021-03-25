@@ -35,27 +35,21 @@ class Engidex {
 
         class Species {
             private:
-                static Engidex defaultEngidex;
                 string species_name;
                 int species_id;
                 Skill uniqueSkill;
             protected:
                 vector<Element> elements;
             public:
-                static void setDefaultEngidex(Engidex e)
-                {
-                    defaultEngidex = e;
-                }
-
                 Species()
                 {
                     species_name = "Unknown";
                     species_id = 0;
                 }
 
-                Species(int id)
+                Species(Engidex e, int id)
                 {
-                    Species spec = defaultEngidex.getSpecies(id);
+                    Species spec = e.getSpecies(id);
                     // cout << spec.species_name << endl;
                     // cout << "__________SLDKFJSLDKJFLSDKJFLSDKJF____________" << endl;
                     species_name = spec.species_name;
@@ -103,6 +97,13 @@ class Engidex {
                 Skill getUniqueSkill() { return uniqueSkill; };
 
                 vector<Element> getElements() { return elements; };
+
+                Species& operator=(const Species& sp)
+                {
+                    cout << "operator=" << endl;
+                    Species *res = new Species(sp);
+                    return *res;
+                };
 
                 bool operator==( Species sp2 ) { return species_id == sp2.species_id; };
                 bool operator==( int id ) { return species_id == id; };
@@ -164,7 +165,7 @@ class Engimon : public Engidex::Species {
             alive = false;
         }
 
-        Engimon(int species_id) : Species(species_id)
+        Engimon(Engidex e, int species_id)
         {
             id = engimon_count;
             engimon_count++;
