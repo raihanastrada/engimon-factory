@@ -26,6 +26,7 @@ class Player {
         ~Player(); // Destructor TEST
         Point getLocation(); // Getter Location Player
         Point getEngimonLocation(); // Getter Location Active Engimon
+        Engimon* getActiveEngimon(); // Getter Active Engimon saat ini
         void Move(char direction); // Bergerak ke kiri, kanan, atas, atau bawah
         void CheckActive(); // Mengecek active engimon
         void SwitchActive(int index); // Mengganti active engimon // Mencari Engimon pada Inv dengan index
@@ -43,6 +44,7 @@ class Player {
         bool IsInventoryFull(); // Mengecek jika inventory full
         void InsertEngimon(Engimon E); // Insert Engimon ke inventory TEST
         void InsertSkillItem(Skill S); // Insert SkillItem ke inventory
+        bool KillActive(); // Menghilangkan ActiveEngimon dari inventory, mengembalikan false jika inventory kosong (game over), true jika masih terdapat engimon
         void PrintInfo(); // Meng-outputkan info player
 };
 

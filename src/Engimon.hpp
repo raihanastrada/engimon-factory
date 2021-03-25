@@ -232,7 +232,7 @@ class Engimon : public Engidex::Species {
 
         void PrintInfo()
         {
-            cout << getEngidexID() << "#" << getSpeciesName() << "\t" << " \"" << name << "\"" << endl;
+             cout << getEngidexID() << "#" << getSpeciesName() << "\t" << " \"" << name << "\"";
         };
 
         void addSkill(Skill newSkill)

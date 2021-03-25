@@ -6,7 +6,7 @@
 
 using namespace std;
 #define Print(n) cout << n << endl
-#define CAPACITY 20 // Maks capacity inventory
+#define CAPACITY 50 // Maks capacity inventory
 
 int Player::maxCapacity = CAPACITY;
 // yang TEST diapus/modify
@@ -16,25 +16,25 @@ Player::Player(string name) {
     this->PlayerName = name;
     this->Location = Point(5, 5);
     this->EngimonLocation = Point(5, 4); // Location engimon awal?
-    this->ActiveEngimon = nullptr; // TEST
-    // this->InvE = Inventory<Engimon>(); // TEST
+    this->ActiveEngimon = nullptr; // Awal nullptr
+    // Awal langsung insert 1 Engimon ke inventory, set jadi Active Engimon
 }
 
 // Default Constructor Player
 Player::Player() : Player("Player") { }
 
-// Operator Assignment TEST
+// Operator Assignment
 Player& Player::operator=(const Player& player) {
     this->PlayerName = player.PlayerName;
     this->Location = player.Location;
     this->EngimonLocation = player.EngimonLocation;
-    // this->InvE = player.InvE;
+    this->InvE = player.InvE;
     this->InvS = player.InvS;
-    // this->ActiveEngimon = player.ActiveEngimon;
+    this->ActiveEngimon = player.ActiveEngimon;
     return *this;
 }
 
-// Destructor Player TEST
+// Destructor Player
 Player::~Player() { delete this->ActiveEngimon; }
 
 // Menggerakkan Player (input W, A, S, D)
@@ -52,18 +52,24 @@ Point Player::getLocation() { return this->Location; }
 // Getter Lokasi Active Engimon
 Point Player::getEngimonLocation() { return this->EngimonLocation; }
 
-// Meng-outputkan Detail Active Engimon (Mengecek Active Engimon) TEST
-// void Player::CheckActive() { ActiveEngimon->PrintInfo(); } // Prints ActiveEngimon Info // PrintDetail?
+// Getter Active Engimon (Pointer ke Engimon) saat ini
+Engimon* Player::getActiveEngimon() { return this->ActiveEngimon; }
 
-// Mengganti Active Engimon dengan Engimon yang berada pada Inventory (int index) TEST
-// void Player::SwitchActive(int index) { ActiveEngimon = InvE.GetItemByIdx(index); } // Indeks Engimon harus diperlihatkan dahulu pada pilihan
+// Meng-outputkan Detail Active Engimon (Mengecek Active Engimon) TEST
+void Player::CheckActive() { ActiveEngimon->PrintInfo(); cout << endl; } // Prints ActiveEngimon Info // PrintDetail?
+
+// Mengganti Active Engimon dengan Engimon yang berada pada Inventory (int index)
+void Player::SwitchActive(int index) { ActiveEngimon = InvE.GetItemByIdx(index); } // Indeks Engimon harus diperlihatkan dahulu pada pilihan
 
 // Menu mengganti active Engimon
 void Player::SwitchActiveMenu() {
-    // Print list engimon (beserta index + 1)
-    // cin >> (input pengguna)
-    // cek validasi input
-    // switch active engimon
+    int input;
+    cout << "Inventory Engimon: " << endl;
+    PrintListEngimon();
+    cout << "Choose ActiveEngimon: ";
+    cin >> input;
+    if ((input - 1) < 0 || (input - 1) >= this->InvE.GetCount()) { cout << "Input not valid" << endl; return; }
+    SwitchActive(input - 1);
 }
 
 // Memperlihatkan isi Inventory Engimon TEST
@@ -83,9 +89,14 @@ void Player::Interact() {
 
 // Print detail suatu Engimon (menampilkan nama parent beserta spesies mereka) serta seluruh atribut kelas
 void Player::PrintEngimonMenu() {
-    // PrintListEngimon
-    // cin >> indexEngimon yang ingin dicek detailnya
-    // getitembyid(indexEngimon)->printinfo / printdetail;
+    int index;
+    cout << "Inventory Engimon: " << endl;
+    PrintListEngimon();
+    cout << "Choose Engimon to show: ";
+    cin >> index;
+    if ((index - 1) < 0 || (index - 1) >= InvE.GetCount()) { cout << "Input not valid" << endl; return; }
+    cout << "Engimon Detail: " << endl;
+    InvE.GetItemByIdx(index)->PrintInfo(); // TEST harusnya PrintDetail
 }
 
 // Mengembalikan true jika Inventory full, false jika tidak TEST
@@ -95,14 +106,21 @@ bool Player::IsInventoryFull() {
 
 // Memasukkan Engimon ke Inventory TEST
 void Player::InsertEngimon(Engimon E) {
-    if (IsInventoryFull()) { cout << "Inventory penuh" << endl; return; }
+    if (IsInventoryFull()) { cout << "Inventory full" << endl; return; }
     InvE.InsertItem(E);
 }
 
 // Memasukkan Skill Item ke inventory TEST
 void Player::InsertSkillItem(Skill S) {
-    if (IsInventoryFull()) { cout << "Inventory penuh" << endl; return; }
+    if (IsInventoryFull()) { cout << "Inventory full" << endl; return; }
     InvS.InsertItem(S);
+}
+
+// Menghilangkan ActiveEngimon dari inventory, mengembalikan false jika game over, true jika masih terdapat engimon di inventory
+bool Player::KillActive() {
+    InvE.DetractItem(*ActiveEngimon);
+    if (InvE.GetCount() > 0) SwitchActive(0);
+    return (InvE.GetCount() > 0);
 }
 
 // Meng-outputkan info player (untuk mengecek atribut Player)

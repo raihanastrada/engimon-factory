@@ -71,11 +71,10 @@ class Inventory {
         void PrintAll() { // Print seluruh info inventory
             int i = 0;
             for (typename vector<pair<T, int>>::iterator i = Inv.begin(); i != Inv.end(); i++) {
-                cout << "Index: " << (distance(Inv.begin(), i)) << endl;
-                cout << (distance(Inv.begin(), i) + 1) << ". " << endl;
-                (*i).first.PrintInfo();
-                cout << "Count: " << (*i).second << endl;
-                cout << endl;
+                // cout << "Index: " << (distance(Inv.begin(), i)) << endl; // TEST
+                cout << (distance(Inv.begin(), i) + 1) << ". ";
+                (*i).first.PrintInfo(); // Setiap PrintInfo() harus ada << endl;
+                cout << "\t" << "Count: " << (*i).second << endl;
             }
         }
 };
