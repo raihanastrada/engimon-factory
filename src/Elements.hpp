@@ -46,12 +46,12 @@ class Element {
         
         friend int getAdvantage(Element a, Element b)
         {
-            pair<Element, Element> e(a,b);
+            pair<Element, Element> e (a,b);
             if (advantageIndex.count(e) == 0)
             {
                 return 1;
             } else {
-                return advantageIndex[pair<Element, Element>(a,b)];
+                return advantageIndex[e];
             }
         };
 };
