@@ -4,6 +4,7 @@
 
 map<pair<Element, Element>, float> Element::advantageIndex;
 Engidex Engidex::Species::defaultEngidex;
+long long int Engimon::engimon_count = 0;
 
 void init()
 {

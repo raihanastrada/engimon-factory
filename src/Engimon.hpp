@@ -31,7 +31,7 @@ First engimon type with elements Ground
 // ASUMSI HANYA ADA SATU ENGIDEX UNTUK SATU GAME.
 class Engidex {
     public:
-        Engidex();
+        // Engidex();
 
         class Species {
             private:
@@ -127,7 +127,9 @@ class Engidex {
             codex[id] = s;
         };
 
-        Species getSpecies(int code) const;
+        Species getSpecies(int code) const {
+            return codex[code];
+        }
 
     private:
         map<int, Species> codex;
