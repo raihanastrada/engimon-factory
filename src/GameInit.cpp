@@ -50,6 +50,9 @@ void init()
 
     Skill shock(1, 1, vector<Element>() = { electric });
     engidex.addSpecies("Pikamee", 3001, shock, electric);
+
+    
+
 }
 
 
