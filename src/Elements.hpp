@@ -68,6 +68,27 @@ class Element {
                 return advantageIndex[e];
             }
         };
+
+        friend float getAdvantage(vector<Element> a, vector<Element>b)
+        {
+            float max = -1;
+            if (a.size() != 0 && b.size() != 0)
+            {
+                for (auto &i: a)
+                {   
+                    for (auto &j: b)
+                    {
+                        if (getAdvantage(i, j) > max)
+                        {
+                            max = getAdvantage(i, j);
+                        }
+                    }
+                }
+            }
+
+            return max;
+            
+        }
 };
 
 #endif
