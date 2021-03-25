@@ -22,24 +22,24 @@ Engidex init()
     Element ground("Ground");
     Element ice("Ice");
 
-    setAdvantage(fire, water, 0.0);
-    setAdvantage(fire, ground, 0.5);
-    setAdvantage(fire, ice, 2.0);
+    Element::setAdvantage(fire, water, 0.0);
+    Element::setAdvantage(fire, ground, 0.5);
+    Element::setAdvantage(fire, ice, 2.0);
     
-    setAdvantage(water, fire, 2.0);
-    setAdvantage(water, electric, 0.0);
+    Element::setAdvantage(water, fire, 2.0);
+    Element::setAdvantage(water, electric, 0.0);
 
-    setAdvantage(electric, water, 2.0);
-    setAdvantage(electric, ground, 1.5);
-    setAdvantage(electric, ice, 1.5);
+    Element::setAdvantage(electric, water, 2.0);
+    Element::setAdvantage(electric, ground, 1.5);
+    Element::setAdvantage(electric, ice, 1.5);
 
-    setAdvantage(ground, fire, 1.5);
-    setAdvantage(ground, electric, 2.0);
-    setAdvantage(ground, ice, 0.0);
+    Element::setAdvantage(ground, fire, 1.5);
+    Element::setAdvantage(ground, electric, 2.0);
+    Element::setAdvantage(ground, ice, 0.0);
 
-    setAdvantage(ice, fire, 0);
-    setAdvantage(ice, electric, 0.5);
-    setAdvantage(ice, ground, 2);
+    Element::setAdvantage(ice, fire, 0);
+    Element::setAdvantage(ice, electric, 0.5);
+    Element::setAdvantage(ice, ground, 2);
 
     // Initialize Pokemon Species
     /*
