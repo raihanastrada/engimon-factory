@@ -88,6 +88,14 @@ class Engidex {
                     elements.push_back(e2);
                 };
 
+                Species(string nm, int id, Skill u, vector<Element> a)
+                {
+                    species_name = nm;
+                    species_id = id;
+                    skills.push_back(u);
+                    elements = a;
+                };
+
                 // Copy constructor
                 Species(const Species &spec)
                 {
@@ -143,6 +151,18 @@ class Engidex {
             codex[id] = s;
         };
 
+        void addSpecies(string name, int id, Skill u, vector<Element> a)
+        {
+            Species s(name, id, u, a);
+            codex[id] = s;
+        }
+
+        // friend void addNewEntry(string name, int code, )
+        // {
+        //     Skill shock(1, 1, vector<Element>() = { electric });
+        //     addSpecies("Pikamee", 1001, shock, electric);
+        // }
+
         Species getSpecies(int code) {
             return codex[code];
         }
@@ -162,6 +182,7 @@ class Engimon : public Engidex::Species {
         string              name;
         vector<Engimon*>    parents;
         int                 exp;
+        int                 level;
         bool                alive;
 
         static long long int engimon_count;
@@ -170,6 +191,7 @@ class Engimon : public Engidex::Species {
         {
             name = "UNKNOWN";
             exp = 0;
+            level = 0;
             alive = false;
         }
 
@@ -180,6 +202,7 @@ class Engimon : public Engidex::Species {
             name = getSpeciesName();
             skills.push_back(getUniqueSkill());
             exp = 0;
+            level = 0;
             alive = true;
         };
 
@@ -190,6 +213,7 @@ class Engimon : public Engidex::Species {
             parents = e.parents;
             skills = e.skills;
             exp = e.exp;
+            level = 0;
             alive = e.alive;
         }
 
@@ -214,7 +238,7 @@ class Engimon : public Engidex::Species {
         /* GETTERS */
         bool    getAlive()              { return alive; };
         string  getName()               { return name; };
-        int     getLevel()              { return exp / 100; };
+        int     getLevel()              { return level; };
         int     getExp()                { return exp % 100; };
         int     getCumulativeExp()      { return exp; };
 
@@ -226,6 +250,10 @@ class Engimon : public Engidex::Species {
                 exp = MAX_EXP;
                 alive = false;
             } else {
+                if ((exp + getExp()) > 100)
+                {
+                    level++;
+                }
                 exp += new_exp;
             }
         };
