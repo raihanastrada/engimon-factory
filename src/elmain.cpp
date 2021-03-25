@@ -34,5 +34,7 @@ int main()
     
     cout << "-----" << 3 << "-----" << endl;
 
-    cout << "Fire vs Ice: " << getAdvantage(fire, ice) << endl;
+    cout << "Fire vs Ice:\t\t " << getAdvantage(fire, ice) << endl;
+    cout << "Fire/Water vs Water/Electric\t " << getAdvantage(vector<Element>() = {fire, water}, vector<Element>() = {water, electric}) << endl;
+    cout << "Water/Electric vs Fire/Water\t " << getAdvantage(vector<Element>() = {water, electric}, vector<Element>() = {fire, water}) << endl;
 }
