@@ -275,7 +275,35 @@ class Engimon : public Engidex::Species {
                 cout << name << " already has 4 skills" << endl;
                 return false;
             }
-        };     
+        };
+
+        void PrintDetail() {
+            cout << "Details: " << endl;
+            PrintInfo(); cout << endl;
+            cout << "ID: " << id << endl;
+            cout << "Level: " << level << endl;
+            cout << "EXP: " << exp << endl;
+            cout << "Status: Alive" << endl;
+            cout << "Skills: ";
+            for (int i = 0; i < skills.size(); i++) {
+                cout << skills.at(i).getName();
+                if (i != skills.size() - 1) { cout << ", "; } 
+            }
+            cout << endl;
+            cout << "Elements: ";
+            for (int i = 0; i < elements.size(); i++) {
+                cout << elements.at(i).getName();
+                if (i != elements.size() - 1) { cout << ", "; }
+            }
+            cout << endl;
+            cout << "Parents: ";
+            if (parents.size() == 0) { cout << "NONE" << endl; return; }
+            for (int i = 0; i < parents.size(); i++) {
+                parents.at(i)->PrintInfo();
+                if (i != parents.size() - 1) { cout << ", "; }
+            }
+            cout << endl;
+        }
 
         vector<Skill> getSkills(){
             return skills;

@@ -62,6 +62,10 @@ int Skill::getMasteryLevel() const{
 	return mastery_level;
 }
 
+string Skill::getName() const {
+	return name;
+}
+
 vector<Element> Skill::getCompatibleElement() const{
 	return compatible_Element;
 }
