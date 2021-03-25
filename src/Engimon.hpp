@@ -263,15 +263,19 @@ class Engimon : public Engidex::Species {
              cout << getEngidexID() << "#" << getSpeciesName() << "\t" << " \"" << name << "\"";
         };
 
-        void addSkill(Skill newSkill)
+        bool addSkill(Skill newSkill)
         {
+            if (!newSkill.isCompatible(elements)) { cout << "SkillItem not compatible with " << name << endl; return false; }
             if (skills.size() < 4 && (find(skills.begin(), skills.end(), newSkill) == skills.end()))
             {
                 skills.push_back(newSkill);
+                cout << name << " learnt a new skill!" << endl; 
+                return true;
             } else {
-                cout << "Engimon sudah memiliki 4 skill" << endl;
+                cout << name << " already has 4 skills" << endl;
+                return false;
             }
-        };   
+        };     
 
         vector<Skill> getSkills(){
             return skills;

@@ -5,7 +5,7 @@
 #include "Inventory.hpp"
 
 using namespace std;
-#define Print(n) cout << n << endl
+
 #define CAPACITY 50 // Maks capacity inventory
 
 int Player::maxCapacity = CAPACITY;
@@ -22,6 +22,16 @@ Player::Player(string name) {
 
 // Default Constructor Player
 Player::Player() : Player("Player") { }
+
+// Copy Constructor
+Player::Player(const Player &player) {
+    this->PlayerName = player.PlayerName;
+    this->Location = player.Location;
+    this->EngimonLocation = player.EngimonLocation;
+    this->ActiveEngimon = player.ActiveEngimon;
+    this->InvE = player.InvE;
+    this->InvS = player.InvS;
+}
 
 // Operator Assignment
 Player& Player::operator=(const Player& player) {
@@ -102,6 +112,29 @@ void Player::PrintEngimonMenu() {
     if ((index - 1) < 0 || (index - 1) >= InvE.GetCount()) { cout << "Input not valid" << endl; return; }
     cout << "Engimon Detail: " << endl;
     InvE.GetItemByIdx(index)->PrintInfo(); // TEST harusnya PrintDetail
+}
+
+// Menggunakan skill item pada InvS[indexS] ke Engimon pada InvE[indexE]
+void Player::UseSkillItem(int indexS, int indexE) {
+    if (!(InvE.GetItemByIdx(indexE))->addSkill(*(InvS.GetItemByIdx(indexS)))) return;
+    InvS.DetractItemByIdx(indexS);
+}
+
+// Menu menggunakan skill item
+void Player::UseSkillItemMenu() {
+    if (InvS.GetCount() == 0) { cout << "Inventory SkillItem empty" << endl; return; }
+    int indexS, indexE;
+    cout << "Inventory SkillItem: " << endl;
+    PrintListSkillItem();
+    cout << "Choose SkillItem to use: ";
+    cin >> indexS;
+    if ((indexS - 1) < 0 || (indexS - 1) >= InvS.GetCount()) { cout << "Input Item not valid" << endl; return; }
+    cout << "Inventory Engimon: " << endl;
+    PrintListEngimon();
+    cout << "Choose Engimon to use SkillItem on: ";
+    cin >> indexE;
+    if ((indexE - 1) < 0 || (indexE - 1) >= InvE.GetCount()) { cout << "Input Engimon not valid" << endl; return; }
+    UseSkillItem(indexS, indexE);
 }
 
 // Mengembalikan true jika Inventory full, false jika tidak TEST

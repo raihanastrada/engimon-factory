@@ -22,6 +22,7 @@ class Player {
     public:
         Player(); // Default constructor
         Player(string name); // User-defined constructor
+        Player(const Player &player); // Copy constructor
         Player& operator=(const Player&); // Operator Assignment
         ~Player(); // Destructor TEST
         Point getLocation(); // Getter Location Player
@@ -36,7 +37,8 @@ class Player {
         // Juga harus menampilkan nama parent beserta spesies mereka
         void PrintListSkillItem(); // Menampilkan list skill item yang dimiliki
         void PrintEngimonMenu(); // Print detail suatu Engimon (menampilkan nama parent beserta spesies mereka) serta seluruh atribut kelas
-        void UseSkillItem(/*apaan*/); // Menggunakan skill item pada suatu engimon
+        void UseSkillItem(int indexS, int indexE); // Menggunakan skill item pada suatu engimon
+        void UseSkillItemMenu(); // Menu menggunakan skill item
         void Breeding(); // Melaksanakan breeding antara 2 engimon
         void Battle(); // Melakukan battle dengan suatu engimon yang berada di dekatnya (adjacent tiles)
         // Petak kiri, kanan, atas, dan bawah (tampilkan detail engimon lawan ke layar)
