@@ -31,6 +31,8 @@ First engimon type with elements Ground
 // ASUMSI HANYA ADA SATU ENGIDEX UNTUK SATU GAME.
 class Engidex {
     public:
+        Engidex();
+
         class Species {
             private:
                 static Engidex defaultEngidex;
@@ -98,8 +100,6 @@ class Engidex {
                 bool operator==( int id ) { return species_id == id; };
                 bool operator==( string name ) { return species_name == name; };
         };
-
-        Engidex();
         
         void addSpecies(string name, int id, Skill u, Element a1, Element a2)
         {

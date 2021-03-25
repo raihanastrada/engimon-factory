@@ -58,7 +58,7 @@ class Element {
             advantageIndex[pair<Element, Element>(a, b)] = mult;
         };
         
-        friend int getAdvantage(Element a, Element b)
+        friend float getAdvantage(Element a, Element b)
         {
             pair<Element, Element> e (a,b);
             if (advantageIndex.count(e) == 0)
