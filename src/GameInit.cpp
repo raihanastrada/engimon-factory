@@ -2,6 +2,8 @@
 #include "Skill.h"
 #include "Elements.hpp"
 
+map<pair<Element, Element>, float> Element::advantageIndex;
+map<int, Engidex::Species> Engidex::codex;
 
 void init()
 {

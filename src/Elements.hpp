@@ -22,6 +22,11 @@ class Element {
         string elementName;
 
     public:
+        Element()
+        {
+            elementName = "UNKNOWN";
+        }
+
         Element(string elementname)
         {
             elementName = elementname;
