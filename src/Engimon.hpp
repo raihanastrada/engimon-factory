@@ -96,6 +96,8 @@ class Engidex {
                 int getEngidexID() { return species_id; };
                 Skill getUniqueSkill() { return uniqueSkill; };
 
+                vector<Element> getElements() { return elements; };
+
                 bool operator==( Species sp2 ) { return species_id == sp2.species_id; };
                 bool operator==( int id ) { return species_id == id; };
                 bool operator==( string name ) { return species_name == name; };
@@ -117,13 +119,13 @@ class Engidex {
         {
             Species s(name, id, u, a1);
             codex[id] = s;
-        }
+        };
 
         void addSpecies(string name, int id, Skill u, string a1)
         {
             Species s(name, id, u, Element(a1));
             codex[id] = s;
-        }
+        };
 
         Species getSpecies(int code) const;
 

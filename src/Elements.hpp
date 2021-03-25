@@ -31,8 +31,6 @@ class Element {
             elementName = elementname;
         };
 
-        ~Element();
-
         friend bool operator==(Element a, Element b)
         {
             return a.elementName == b.elementName;
