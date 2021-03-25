@@ -56,14 +56,14 @@ class Element {
             }
         }
 
-        static void setAdvantage(Element a, Element b, float mult)
+        friend void setAdvantage(Element a, Element b, float mult)
         {
             cout << "s" << endl;
             advantageIndex.insert(make_pair(make_pair(a, b), mult));
             cout << "sn" << endl;
         };
         
-        static float getAdvantage(Element a, Element b)
+        friend float getAdvantage(Element a, Element b)
         {
             pair<Element, Element> e (a,b);
             if (advantageIndex.count(e) == 0)
@@ -74,7 +74,7 @@ class Element {
             }
         };
 
-        static float getAdvantage(vector<Element> a, vector<Element>b)
+        friend float getAdvantage(vector<Element> a, vector<Element>b)
         {
             float max = -1;
             if (a.size() != 0 && b.size() != 0)
