@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 
+#include <iostream>
 using namespace std;
 
 /*
@@ -42,7 +43,7 @@ class Element {
 
         friend bool operator<(Element a, Element b)
         {
-            return a < b;
+            return a.elementName < b.elementName;
         }
 
         friend bool operator<(pair<Element, Element> a, pair<Element, Element> b)
@@ -57,7 +58,9 @@ class Element {
 
         static void setAdvantage(Element a, Element b, float mult)
         {
+            cout << "s" << endl;
             advantageIndex.insert(make_pair(make_pair(a, b), mult));
+            cout << "sn" << endl;
         };
         
         static float getAdvantage(Element a, Element b)
