@@ -214,7 +214,7 @@ void Peta::battle(){
     // cari adjacent wild engimon
     // prioritas adjacent engimon yang dipilih random
     vector<int> dx = {1, 0, -1, 0}, dy = {0, 1, 0, -1};
-    mt19937 rng(new char); // pseudo-random generator
+    mt19937 rng((unsigned long long)new char); // pseudo-random generator
     vector<pair<int, int>> adjacent_cell_coordinates;
     for (int i=0; i<(int)dx.size(); i++) adjacent_cell_coordinates.emplace_back(getPlayerX()+dx[i], getPlayerY()+dy[i]);
     shuffle(adjacent_cell_coordinates.begin(), adjacent_cell_coordinates.end(), rng);
@@ -233,14 +233,14 @@ void Peta::battle(){
         throw 1;
     }
 
-    Cell &tmp = cell[wild_engimon_cell_coordinate.x][wild_engimon_cell_coordinate.y];
+    Cell &tmp = cell[wild_engimon_cell_coordinate.first][wild_engimon_cell_coordinate.second];
     Engimon *enemy = tmp.getEngimon();
     // nampilin info wild engimon
-    enemy->printInfo();
+    enemy->PrintInfo();
 
     // ngitung sama nampilin power
-    Battle::printPower(player.getActiveEngimon(), *enemy);
-    bool playerWins = Battle::comparePower(player.getActiveEngimon(), *enemy);
+    Battle::printPower(*player.getActiveEngimon(), *enemy);
+    bool playerWins = Battle::comparePower(*player.getActiveEngimon(), *enemy);
 
     if (playerWins){
         // player menang, dapet wild engimon dan random skill item
@@ -248,7 +248,7 @@ void Peta::battle(){
         player.InsertEngimon(*enemy);
         vector<Element> enemy_elements = enemy->getElements();
         int gacha = rng()%(int)enemy_elements.size();
-        player.InsertSkillItem(catalog.getRandomSkillByElement(enemy_elements[gacha]));
+        player.InsertSkillItem(catalogSkill.getRandomSkillByElement(enemy_elements[gacha]));
         delete enemy;
         // gatau perlu setCell apa enggak
     }

@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Engimon.hpp"
 #include "Elements.hpp"
+#include "Battle.h"
 #include <string>
 #include <experimental/random>
 
