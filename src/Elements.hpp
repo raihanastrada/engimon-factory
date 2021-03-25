@@ -31,6 +31,29 @@ class Element {
         {
             elementName = elementname;
         };
+		
+		Element(int elementid)
+		{
+			switch(elementid) {
+				case 1:
+					elementName = "Electric";
+					break;
+				case 2:
+					elementName = "Fire";
+					break;
+				case 3:
+					elementName = "Ground";
+					break;
+				case 4:
+					elementName = "Ice";
+					break;
+				case 5:
+					elementName = "Water";
+					break;
+				case 0:
+					break;
+			}
+		}
 
         string getName(){
             return elementName;
