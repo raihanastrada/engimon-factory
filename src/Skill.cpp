@@ -29,12 +29,12 @@ Skill& Skill::operator=(const Skill &other){
 	return *this;
 }
 
-bool Skill::operator==(Skill &other){
-	return this->id == other.id;
+bool operator==(Skill a, Skill b){
+	return a.id == b.id;
 }
 
-bool Skill::operator<(Skill &other){
-	return this->mastery_level < other.mastery_level;
+bool operator<(Skill a, Skill b){
+	return a.mastery_level < b.mastery_level;
 }
 
 int Skill::getBasePower() const{
@@ -59,6 +59,16 @@ void Skill::setMasteryLevel(int _mastery_level){
 
 void Skill::setCompatibleElement(vector<Element> _compatible_Element){
 	this->compatible_Element = _compatible_Element;
+}
+
+bool Skill::isCompatible(vector<Element> _elements){
+	// bruteforce O(N^2)
+	for (Element e1 : compatible_Element){
+		for (Element e2 : _elements){
+			if (e1 == e2) return true;
+		}
+	}
+	return false;
 }
 
 /*void printInfo(){

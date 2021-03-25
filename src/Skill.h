@@ -27,9 +27,9 @@ public:
 	Skill& operator=(const Skill &other);
 
 	// comparator equal
-	bool operator==(Skill &other);
+	friend bool operator==(Skill a, Skill b);
 	// comparator less
-	bool operator<(Skill &other);
+	friend bool operator<(Skill a, Skill b);
 
 	// getter
 	int getBasePower() const;
