@@ -1,6 +1,8 @@
 #ifndef _GAMEINIT_HPP_
 #define _GAMEINIT_HPP_
 
-void init();
+#include "Engimon.hpp"
+
+Engidex init();
 
 #endif

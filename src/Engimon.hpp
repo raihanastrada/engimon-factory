@@ -31,13 +31,27 @@ First engimon type with elements Ground
 // ASUMSI HANYA ADA SATU ENGIDEX UNTUK SATU GAME.
 class Engidex {
     public:
-        // Engidex();
+        Engidex()
+        {
+            codex = map<int, Species>();
+        }
+
+        Engidex(const Engidex &eng) 
+        {
+            codex = eng.codex;
+        }
+
+        Engidex& operator=(const Engidex &e)
+        {
+            Engidex *res = new Engidex(e);
+            return *res;
+        }
 
         class Species {
             private:
-                string species_name;
                 int species_id;
                 Skill uniqueSkill;
+                string species_name;
             protected:
                 vector<Element> elements;
             public:
@@ -50,8 +64,6 @@ class Engidex {
                 Species(Engidex e, int id)
                 {
                     Species spec = e.getSpecies(id);
-                    // cout << spec.species_name << endl;
-                    // cout << "__________SLDKFJSLDKJFLSDKJFLSDKJF____________" << endl;
                     species_name = spec.species_name;
                     species_id = spec.species_id;
                     uniqueSkill = spec.uniqueSkill;
@@ -74,8 +86,6 @@ class Engidex {
                     uniqueSkill = u;
                     elements.push_back(e1);
                     elements.push_back(e2);
-                    cout << "_-------------------_" << endl;
-                    cout << species_name << endl;
                 };
 
                 // Copy constructor
@@ -100,7 +110,6 @@ class Engidex {
 
                 Species& operator=(const Species& sp)
                 {
-                    cout << "operator=" << endl;
                     Species *res = new Species(sp);
                     return *res;
                 };
@@ -125,7 +134,7 @@ class Engidex {
         void addSpecies(string name, int id, Skill u, Element a1)
         {
             Species s(name, id, u, a1);
-            codex[id] = s;
+            codex.insert(make_pair(id, s));
         };
 
         void addSpecies(string name, int id, Skill u, string a1)
@@ -165,18 +174,17 @@ class Engimon : public Engidex::Species {
             alive = false;
         }
 
-        Engimon(Engidex e, int species_id)
+        Engimon(Engidex e, int species_id) : Species(e, species_id)
         {
             id = engimon_count;
             engimon_count++;
-
             name = getSpeciesName();
             skills.push_back(getUniqueSkill());
             exp = 0;
             alive = true;
         };
 
-        Engimon(const Engimon &e)
+        Engimon(const Engimon &e) : Species(e)
         {
             id = e.id;
             name = e.name;
@@ -225,12 +233,7 @@ class Engimon : public Engidex::Species {
 
         void PrintInfo()
         {
-            // cout << "Name     : " << name << endl;
-            // for(auto &i : parents) {
-            // cout << "Parent   : " << i->name << endl;
-            // }
-            // species_info_print();
-            cout << getSpeciesName() << endl;
+            cout << getEngidexID() << "#" << getSpeciesName() << "\t" << " \"" << name << "\"" << endl;
         };
 
         void addSkill(Skill newSkill)
