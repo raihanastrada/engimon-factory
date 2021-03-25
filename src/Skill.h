@@ -22,9 +22,9 @@ public:
 	// custom ctor
 	Skill(int _base_power, int _mastery_level, vector<Element> _compatible_Element);
 	// cctor
-	Skill(Skill &other);
+	Skill(const Skill &other);
 	// assignment op
-	Skill& operator=(Skill &other);
+	Skill& operator=(const Skill &other);
 
 	// comparator equal
 	bool operator==(Skill &other);
@@ -42,7 +42,7 @@ public:
 	void setCompatibleElement(vector<Element> _compatible_Element);
 
 	// print info
-	// void PrintInfo();
+	void PrintInfo();
 };
 
 #endif

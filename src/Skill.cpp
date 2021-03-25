@@ -14,14 +14,14 @@ Skill::Skill(int _base_power, int _mastery_level, vector<Element> _compatible_El
 	curr_id++;
 }
 
-Skill::Skill(Skill &other){
+Skill::Skill(const Skill &other){
 	this->base_power = other.base_power;
 	this->mastery_level = other.mastery_level;
 	this->compatible_Element = other.compatible_Element;
 	this->id = other.id;
 }
 
-Skill& Skill::operator=(Skill &other){
+Skill& Skill::operator=(const Skill &other){
 	this->base_power = other.base_power;
 	this->mastery_level = other.mastery_level;
 	this->compatible_Element = other.compatible_Element;
@@ -73,3 +73,7 @@ void Skill::setCompatibleElement(vector<Element> _compatible_Element){
 	}
 	cout << "\n";
 }*/
+
+void Skill::PrintInfo() {
+	cout << "Base Power: " << this->base_power << endl; // TESTing
+}
