@@ -134,7 +134,7 @@ class Engidex {
         };
 
         Species getSpecies(int code) const {
-            return (*codex.find(code)).second;
+            return codex.at(code);
         }
 
     private:
