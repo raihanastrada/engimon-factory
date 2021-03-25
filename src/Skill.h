@@ -40,6 +40,7 @@ public:
 	// getter
 	int getBasePower() const;
 	int getMasteryLevel() const;
+	string getName() const;
 	vector<Element> getCompatibleElement() const;
 
 	// setter

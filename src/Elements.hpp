@@ -81,9 +81,7 @@ class Element {
 
         friend void setAdvantage(Element a, Element b, float mult)
         {
-            cout << "s" << endl;
             advantageIndex.insert(make_pair(make_pair(a, b), mult));
-            cout << "sn" << endl;
         };
         
         friend float getAdvantage(Element a, Element b)
