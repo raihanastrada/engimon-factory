@@ -3,7 +3,7 @@
 #include "Elements.hpp"
 
 map<pair<Element, Element>, float> Element::advantageIndex;
-map<int, Engidex::Species> Engidex::codex;
+Engidex Engidex::Species::defaultEngidex;
 
 void init()
 {
@@ -34,9 +34,11 @@ void init()
         Skill skill(basepower, masterlevel, vector<Element> compatibleElement);
         Engidex::addSpecies(name, id, skill, elementName) (you can use string for el name)
     */
+    Engidex engidex;
+    Engidex::Species::setDefaultEngidex(engidex);
 
     Skill shock(1, 1, vector<Element>() = { electric });
-    Engidex::addSpecies("Pikamee", 3001, shock, electric);
+    engidex.addSpecies("Pikamee", 3001, shock, electric);
 }
 
 

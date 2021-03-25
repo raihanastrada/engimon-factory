@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <algorithm>
 
 #include "Point.h"
 #include "Skill.h"
@@ -32,11 +33,18 @@ class Engidex {
     public:
         class Species {
             private:
+                static Engidex defaultEngidex;
                 string species_name;
                 int species_id;
                 Skill uniqueSkill;
+            protected:
                 vector<Element> elements;
             public:
+                static void setDefaultEngidex(Engidex e)
+                {
+                    defaultEngidex = e;
+                }
+
                 Species()
                 {
                     species_name = "Unknown";
@@ -45,7 +53,7 @@ class Engidex {
 
                 Species(int id)
                 {
-                    Species spec = Engidex::getSpecies(id);
+                    Species spec = defaultEngidex.getSpecies(id);
 
                     species_name = spec.species_name;
                     species_id = spec.species_id;
@@ -93,35 +101,34 @@ class Engidex {
 
         Engidex();
         
-        static void addSpecies(string name, int id, Skill u, Element a1, Element a2)
+        void addSpecies(string name, int id, Skill u, Element a1, Element a2)
         {
             Species s(name, id, u, a1, a2);
             codex[id] = s;
         };
 
-        static void addSpecies(string name, int id, Skill u, string a1, string a2)
+        void addSpecies(string name, int id, Skill u, string a1, string a2)
         {
             Species s(name, id, u, Element(a1), Element(a2));
             codex[id] = s;
         };
 
-        static void addSpecies(string name, int id, Skill u, Element a1)
+        void addSpecies(string name, int id, Skill u, Element a1)
         {
             Species s(name, id, u, a1);
             codex[id] = s;
         }
 
-        static void addSpecies(string name, int id, Skill u, string a1)
+        void addSpecies(string name, int id, Skill u, string a1)
         {
             Species s(name, id, u, Element(a1));
             codex[id] = s;
         }
 
-        static Species getSpecies(int code);
+        Species getSpecies(int code) const;
 
     private:
-        static map<int, Species> codex;
-        // static int generateEngidexId(); too lazy to make this
+        map<int, Species> codex;
 };
 
 /*
@@ -216,7 +223,7 @@ class Engimon : public Engidex::Species {
 
         void addSkill(Skill newSkill)
         {
-            if (skills.size() < 4)
+            if (skills.size() < 4 && (find(skills.begin(), skills.end(), newSkill) == skills.end()))
             {
                 skills.push_back(newSkill);
             } else {

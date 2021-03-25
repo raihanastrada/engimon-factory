@@ -41,6 +41,9 @@ public:
 	void setMasteryLevel(int _mastery_level);
 	void setCompatibleElement(vector<Element> _compatible_Element);
 
+	// check compatibility
+	bool isCompatible(vector<Element> _elements);
+
 	// print info
 	void PrintInfo();
 };
