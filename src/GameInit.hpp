@@ -2,13 +2,16 @@
 #define _GAMEINIT_HPP_
 
 #include "Engimon.hpp"
+#include "Skill.h"
+#include <random>
 
 class GameInitiator {
     private:
         Engidex e;
+        CatalogSkill c;
         vector<Element> el;
     public:
-        Engidex init();
+        pair<Engidex, CatalogSkill> init();
     private:
         void addNewEntry(int id, string name, string skillname, Element a);
         void addNewEntry(int id, string name, string skillname, Element a, Element b);
@@ -17,7 +20,7 @@ class GameInitiator {
         void setEngidex(Engidex en) { e = en; };
         void setElements(vector<Element> en) { el = en; };
 
-        void generatePokemon();     
+        void generatePokemon();
 };
 
 #endif

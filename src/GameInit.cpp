@@ -30,11 +30,13 @@ void GameInitiator::addNewEntry(int id, string name, string skillname)
         elements.push_back(el[i]);
     }    
 
-    Skill skill(skillname, 1, elements);
+    mt19937 rng((unsigned long long)new char); // pseudo-random generator untuk base power
+    Skill skill(skillname, rng()%4+1, elements);
+    c.addSkill(skill);
     e.addSpecies(name, id, skill, elements);
 }
 
-Engidex GameInitiator::init()
+pair<Engidex, CatalogSkill> GameInitiator::init()
 {
     // Initialize Elements
     /*
@@ -107,7 +109,7 @@ Engidex GameInitiator::init()
 
     generatePokemon();
 
-    return e;
+    return make_pair(e, c);
 }
 
 void GameInitiator::generatePokemon()
