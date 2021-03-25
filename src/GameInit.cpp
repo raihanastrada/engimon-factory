@@ -190,15 +190,15 @@ void GameInitiator::generatePokemon()
     addNewEntry(5009, "Rikka", "Wet");
 
 
-    addNewEntry(1301, "Mori Calliope", "Magnetize");
-    addNewEntry(1302, "Moona Hoshinova", "Gravitate");
-    addNewEntry(1303, "Airani Iofifteen", "Paint");
-    addNewEntry(1304, "Kureiji Ollie", "Resurrect");
-    addNewEntry(1305, "Anya Melfissa", "Blade Slash");
-    addNewEntry(1306, "Ninomae Ina'nis", "Call Upon The Ancient One");
-    addNewEntry(1307, "Yogiri", "Fire and Electric Attack 1");
-    addNewEntry(1308, "Civia", "Summon '93 Honda Civic");
-    addNewEntry(1309, "Pepsi Man", "Is Pepsi Ok?");
+    addNewEntry(1201, "Mori Calliope", "Magnetize");
+    addNewEntry(1202, "Moona Hoshinova", "Gravitate");
+    addNewEntry(1203, "Airani Iofifteen", "Paint");
+    addNewEntry(1204, "Kureiji Ollie", "Resurrect");
+    addNewEntry(1205, "Anya Melfissa", "Blade Slash");
+    addNewEntry(1206, "Ninomae Ina'nis", "Call Upon The Ancient One");
+    addNewEntry(1207, "Yogiri", "Fire and Electric Attack 1");
+    addNewEntry(1208, "Civia", "Summon '93 Honda Civic");
+    addNewEntry(1209, "Pepsi Man", "Is Pepsi Ok?");
 
     addNewEntry(5301, "Suba, Oozora Subaru", "Shuba");
     addNewEntry(5302, "Minato Aqua", "Onionize");
