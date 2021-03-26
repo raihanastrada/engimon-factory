@@ -11,15 +11,15 @@
 #include "GameInit.hpp"
 
 using namespace std;
-
+#define LINEE(n) cout << "--------" << n << "--------" << endl;
 int main() {
     string playerName;
     int engCount;
     int minLVL;
     string command;
     bool running;
-    GameInitiator G;
-    pair<Engidex, CatalogSkill> GP = G.init();
+    GameInitiator GI;
+    pair<Engidex, CatalogSkill> G = GI.init();
 
     cout << "Selamat datang di dunia Engimon!" << endl;
     cout << "Sebelum memulai permainan, siapakah namamu? ";
@@ -39,18 +39,24 @@ int main() {
     Map.viewmap();
     cout << "Selamat datang di dunia engimon gambar di atas merupakan peta dari dunia Engimon" << endl;
     cout << "Tuliskan command '-help' untuk mengetahui list command yang dapat digunakan, selamat berpetualang "+playerName+"!" << endl;
-    Map.getPlayer()->InsertEngimon(Engimon(*(Map.getEngidex()), 3001)); // Insert first engimon
+    Map.getPlayer()->InsertEngimon(Engimon(G.first, 3001)); // Insert first engimon
     Map.getPlayer()->SwitchActive(0); // Inisialisasi ActiveEngimon
     running = true;
+
     while (running)
     {
         cout << ">> ";
         cin >> command;
         if (command.length() == 1 && (command[0] == 'W' || command[0] == 'A' || command[0] == 'S' || command[0] == 'D' || command[0] == 'w' || command[0] == 'a' || command[0] == 's' || command[0] == 'd')) {
+            LINEE(0)
             Map.getPlayer()->Move(command[0]);
+            LINEE(1)
             Map.viewmap();
-            // Map.increaseTurn();
-            // Map.spawnEnemy();
+            LINEE(2)
+            Map.increaseTurn();
+            LINEE(3)
+            Map.spawnEnemy(G.first);
+            LINEE(4)
         }
         if (command == "inventory") {
             string cmd;

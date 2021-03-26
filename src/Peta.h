@@ -30,7 +30,6 @@ class Peta
         Player player;              // Player, buat ngambil lokasi player
         CatalogSkill catalogSkill;  // catalog skill [NOTE belum diconstruct]
         static int turn;            // Turn
-        pair<Engidex, CatalogSkill> GI;
         
     public:
         /* Ctor */
@@ -47,7 +46,6 @@ class Peta
         int getEngimonX();
         int getEngimonY();
         Player* getPlayer();
-        Engidex* getEngidex();
         
         // Setter
         /* Set cell pada Cell[i][j] */
@@ -63,9 +61,9 @@ class Peta
         /* Engimon pada map bergerak random */
         void randomMove();
         /* Spawn engimon */
-        void spawnEnemy();
+        void spawnEnemy(Engidex e);
         /* Mengenerate random engimon */
-        Engimon generateEngimon();
+        Engimon generateEngimon(Engidex e);
         /* Move engimon dari cell c1 ke cell c2 */        
         void moveEngimon(Cell c1, Cell c2);
         /* Mengecek apakah engimon valid bergerak ke cell */

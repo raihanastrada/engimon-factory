@@ -67,18 +67,33 @@ char Cell::engimonView() {
     Element electric("Electric");
     Element ground("Ground");
     Element ice("Ice");
-    if (engimon->getElements().at(0) == electric)
-    {
-        if (engimon->getElements().at(1) == fire){return 'l';}
-        else{return 'e';}
+    // engimon->PrintDetail();
+    // LINEx(101010101)
+    if (engimon->getElements().size() == 1) {
+        if (engimon->getElements().at(0) == fire) return 'f';
+        if (engimon->getElements().at(0) == ground) return 'g';
+        if (engimon->getElements().at(0) == electric) return 'e';
+        if (engimon->getElements().at(0) == water) return 'w';
+        if (engimon->getElements().at(0) == ice) return 's';
     }
-    else if (engimon->getElements().at(0) == water)
-    {
-        if (engimon->getElements().at(1) == ice){return 's';}
-        else if (engimon->getElements().at(1) == ground){return 'n';}
-        else{return 'w';}
+    else {
+        if (engimon->getElements().at(0) == electric) return 'l';
+        if (engimon->getElements().at(1) == ice) return 's';
+        if (engimon->getElements().at(1) == ground) return 'n';
     }
-    else if (engimon->getElements().at(0) == fire) {return'f';}
-    else if (engimon->getElements().at(0) == ground) {return 'g';}
-    else{return 'i';}
+    // if (engimon->getElements().at(0) == electric)
+    // {
+    //     if (engimon->getElements().at(1) == fire){return 'l';}
+    //     else{return 'e';}
+    // }
+    // else if (engimon->getElements().at(0) == water)
+    // {
+    //     if (engimon->getElements().at(1) == ice){return 's';}
+    //     else if (engimon->getElements().at(1) == ground){return 'n';}
+    //     else{return 'w';}
+    // }
+    // else if (engimon->getElements().at(0) == fire) {return'f';}
+    // else if (engimon->getElements().at(0) == ground) {return 'g';}
+    // else{return 'i';}
+    return 'i';
 }
