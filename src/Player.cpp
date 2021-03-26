@@ -77,6 +77,7 @@ void Player::SwitchActive(int index) { ActiveEngimon = InvE.GetItemByIdx(index);
 
 // Menu mengganti active Engimon
 void Player::SwitchActiveMenu() {
+    cout << "Menu mengganti Active Engimon" << endl;
     cout << "Current Active Engimon: "; CheckActive();
     int input;
     cout << "Inventory Engimon: " << endl;
@@ -99,7 +100,8 @@ void Player::PrintListSkillItem() {
 }
 
 void Player::BreedingMenu(Engidex Engi) {
-    if (IsInventoryFull()) { cout << "Inventory full" << endl; return; }
+    if (IsInventoryFull()) { cout << "Inventory full, tidak dapat menjalankan breeding" << endl; return; }
+    cout << "Menu breeding: " << endl;
     int idx1, idx2;
     cout << "First Engimon" << endl;
     PrintListEngimon();
@@ -130,12 +132,13 @@ void Player::Interact() {
     for (int i=0; i<min(4, (int)name.length()); i++) slogan.push_back(name[i]);
     slogan += slogan;
     
-    cout << '[' << name << "]: " << slogan << "?!?!?" << "\n";
+    cout << '[' << name << "]: " << slogan << "!!!" << "\n";
 }
 
 // Print detail suatu Engimon (menampilkan nama parent beserta spesies mereka) serta seluruh atribut kelas
 void Player::PrintEngimonMenu() {
     int index;
+    cout << "Menu detail Engimon: " << endl;
     cout << "Inventory Engimon: " << endl;
     PrintListEngimon();
     cout << "Choose Engimon to show: ";
@@ -154,6 +157,7 @@ void Player::UseSkillItem(int indexS, int indexE) {
 // Menu menggunakan skill item
 void Player::UseSkillItemMenu() {
     if (InvS.GetCount() == 0) { cout << "Inventory SkillItem empty" << endl; return; }
+    cout << "Menu use SkillItem: " << endl;
     int indexS, indexE;
     cout << "Inventory SkillItem: " << endl;
     PrintListSkillItem();
