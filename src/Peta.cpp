@@ -201,6 +201,9 @@ void Peta::spawnEnemy(Engidex e) {
         5301,5302,5303,5304,5305,5306,5307,5308,5309,
         5401,5402,5403,5404,5405,5406,5407,5408,5409};
         Engimon *engiEnemy = new Engimon(e, possibleId[rand() % 72]);
+        int maxLvl = 100;
+        if (this->player.getActiveEngimon()->getLevel() < 90) {maxLvl = this->player.getActiveEngimon()->getLevel()+10;}
+        engiEnemy->setLevel(random(this->player.getActiveEngimon()->getLevel(),maxLvl));
         int i,j;
         if (engiEnemy->getElements().at(0) == water || engiEnemy->getElements().at(0) == ice)
         {
@@ -220,7 +223,7 @@ void Peta::spawnEnemy(Engidex e) {
         }
         cell[i][j].setEngimon(engiEnemy);
         this->engimonCount -= 1;
-        cout << "Telah muncul sebuah "<< engiEnemy->getName() << "di titik ("<<j<<","<<i<<")" << endl;
+        cout << "Telah muncul sebuah "<< engiEnemy->getName() << " LV " << engiEnemy->getLevel() << " di titik ("<<j<<","<<i<<")" << endl;
     }
 }
 // Engimon Peta::generateEngimon(Engidex* e) {
@@ -285,7 +288,8 @@ bool Peta::isValidIdx(int i, int j) {
     return true;
 }
 int Peta::random(int min, int max) {
-    return experimental::randint(min, max);
+    mt19937 rng((unsigned long long)new char); // pseudo-random generator
+    return rng()%(max-min+1)+min;
 }
 bool Peta::battle(CatalogSkill &catalog_skill){
     // cari adjacent wild engimon
@@ -329,22 +333,16 @@ bool Peta::battle(CatalogSkill &catalog_skill){
         cout << "Engimonmu menang!\n";
         if (!player.IsInventoryFull()){
             player.InsertEngimon(*enemy);
-            line(1)
             vector<Element> enemy_elements = enemy->getElements();
-            line(2)
-            cout << "elemen enemy ada " << enemy_elements.size() << "\n";
             int gacha = rng()%(int)enemy_elements.size();
             Skill randomSkill = catalog_skill.getRandomSkillByElement(enemy_elements[gacha]);
-            line(3)
             player.InsertSkillItem(randomSkill);
-            line(4)
             cout << "Kamu mendapatkan engimon ";
             enemy->PrintInfo();
             cout << "\nKamu mendapatkan skill ";
             randomSkill.PrintInfo();
             tmp.setEngimon(nullptr);
             delete enemy;
-            line(5)
         }
         int gacha_exp = rng()%99 + 1;
         player.getActiveEngimon()->addExp(gacha_exp);
