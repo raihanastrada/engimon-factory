@@ -323,11 +323,19 @@ bool Peta::battle(){
     if (playerWins){
         // player menang, dapet wild engimon dan random skill item
         // wild engimon dihapus dari map
-        player.InsertEngimon(*enemy);
-        vector<Element> enemy_elements = enemy->getElements();
-        int gacha = rng()%(int)enemy_elements.size();
-        player.InsertSkillItem(catalogSkill.getRandomSkillByElement(enemy_elements[gacha]));
-        delete enemy;
+        cout << "Engimonmu menang!\n";
+        if (!player.IsInventoryFull()){
+            player.InsertEngimon(*enemy);
+            vector<Element> enemy_elements = enemy->getElements();
+            int gacha = rng()%(int)enemy_elements.size();
+            Skill randomSkill = catalogSkill.getRandomSkillByElement(enemy_elements[gacha]);
+            player.InsertSkillItem(randomSkill);
+            delete enemy;
+            cout << "Kamu mendapatkan engimon ";
+            enemy->PrintDetail();
+            cout << "Kamu mendapatkan skill ";
+            randomSkill.PrintInfo(); 
+        }
         int gacha_exp = rng()%99 + 1;
         player.getActiveEngimon()->addExp(gacha_exp);
         if (!player.getActiveEngimon()->getAlive()){
@@ -337,6 +345,7 @@ bool Peta::battle(){
     }
     else{
         // player mati, active engimon ilang
+        cout << "Engimonmu kalah!\n";
         ret = player.KillActive();
     }
     return ret;
