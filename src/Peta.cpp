@@ -287,7 +287,7 @@ bool Peta::isValidIdx(int i, int j) {
 int Peta::random(int min, int max) {
     return experimental::randint(min, max);
 }
-void Peta::battle(){
+bool Peta::battle(){
     // cari adjacent wild engimon
     // prioritas adjacent engimon yang dipilih random
     vector<int> dx = {1, 0, -1, 0}, dy = {0, 1, 0, -1};
@@ -318,6 +318,7 @@ void Peta::battle(){
     // ngitung sama nampilin power
     // Battle::printPower(*player.getActiveEngimon(), *enemy);
     bool playerWins = Battle::comparePower(*player.getActiveEngimon(), *enemy);
+    bool ret = true; // return value battle, defaultnya true karena nggak game over
 
     if (playerWins){
         // player menang, dapet wild engimon dan random skill item
@@ -330,13 +331,13 @@ void Peta::battle(){
         int gacha_exp = rng()%99 + 1;
         player.getActiveEngimon()->addExp(gacha_exp);
         if (!player.getActiveEngimon()->getAlive()){
-            player.KillActive();
+            ret = player.KillActive();
         }
         // gatau perlu setCell apa enggak
     }
     else{
         // player mati, active engimon ilang
-        player.KillActive();
+        ret = player.KillActive();
     }
-
+    return ret;
 }

@@ -73,7 +73,7 @@ class Peta
         /* Mengecek apakah index valid */
         bool isValidIdx(int i, int j);
         int random(int min, int max);
-        void battle();
+        bool battle();
 };  
 
 #endif  
