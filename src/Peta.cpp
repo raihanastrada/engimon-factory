@@ -28,7 +28,7 @@ Peta::Peta(string filename, int _engimonCount, Player _player, int _minLvl) : mi
         while (getline(readfile, line)) // keep reading file
         {
             int j;
-            for (j = 0; j < 10; j++)
+            for (j = 0; j < 12; j++)
             {
                 Cell c;
                 if (line[j] == 'o')
@@ -239,7 +239,7 @@ void Peta::battle(){
     enemy->PrintInfo();
 
     // ngitung sama nampilin power
-    Battle::printPower(*player.getActiveEngimon(), *enemy);
+    // Battle::printPower(*player.getActiveEngimon(), *enemy);
     bool playerWins = Battle::comparePower(*player.getActiveEngimon(), *enemy);
 
     if (playerWins){

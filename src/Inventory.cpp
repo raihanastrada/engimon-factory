@@ -1,17 +1,18 @@
 #include "Inventory.h"
+#include <iostream>
 
 using namespace std;
 
 //Ctor
 template<typename T>
 Inventory<T>::Inventory(){
-    totalObject = 0;
+    totalItem = 0;
 }
 
 //Insert item ke inventory
 template<typename T>
 void Inventory<T>::insertItem(T item){
-    if (totalObject < CAPACITY)
+    if (totalItem < CAPACITY)
     {
         itemInventory[item]++;
         totalItem++;
