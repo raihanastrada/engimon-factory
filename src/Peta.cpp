@@ -299,7 +299,7 @@ bool Peta::battle(){
     pair<int, int> wild_engimon_cell_coordinate = make_pair(-1, -1);
     for (auto &coord : adjacent_cell_coordinates){
         int x = coord.first, y = coord.second;
-        if (cell[x][y].getEngimon()){
+        if (x >= 0 && y >= 0 && x <= 11 && y <= 9 && cell[x][y].getEngimon()){
             // ada engimon di (x, y)
             wild_engimon_cell_coordinate = coord;
         }
@@ -310,10 +310,11 @@ bool Peta::battle(){
         throw 1;
     }
 
-    Cell &tmp = cell[wild_engimon_cell_coordinate.first][wild_engimon_cell_coordinate.second];
+    Cell &tmp = cell[wild_engimon_cell_coordinate.second][wild_engimon_cell_coordinate.first];
     Engimon *enemy = tmp.getEngimon();
     // nampilin info wild engimon
     enemy->PrintInfo();
+    cout << "\n";
 
     // ngitung sama nampilin power
     // Battle::printPower(*player.getActiveEngimon(), *enemy);
@@ -332,8 +333,8 @@ bool Peta::battle(){
             player.InsertSkillItem(randomSkill);
             delete enemy;
             cout << "Kamu mendapatkan engimon ";
-            enemy->PrintDetail();
-            cout << "Kamu mendapatkan skill ";
+            enemy->PrintInfo();
+            cout << "\nKamu mendapatkan skill ";
             randomSkill.PrintInfo(); 
         }
         int gacha_exp = rng()%99 + 1;
