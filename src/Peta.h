@@ -38,6 +38,7 @@ class Peta
         
         // Getter
         Cell getCell(int i, int j);
+        Cell* getCellP(int i, int j);
         const int getMinLvl();
         int getEngimonCount();
         int getPlayerX();
@@ -51,6 +52,7 @@ class Peta
         void setCell(Cell c, int i, int j);
         void setEngimonCount(int count);
         void increaseTurn();
+        void setEngimonAt(int i, int j, Engimon *e);
 
         // Method
         /* Menampilkan tampilan peta */

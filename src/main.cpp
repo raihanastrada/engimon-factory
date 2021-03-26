@@ -59,7 +59,23 @@ int main() {
         cout << ">> ";
         cin >> command;
         if (command.length() == 1 && (command[0] == 'W' || command[0] == 'A' || command[0] == 'S' || command[0] == 'D' || command[0] == 'w' || command[0] == 'a' || command[0] == 's' || command[0] == 'd')) {
-            Map.getPlayer()->Move(command[0]);
+            try {
+                Point AEtemp = Map.getPlayer()->getEngimonLocation();
+                // int AEx = Map.getEngimonX(), AEy = Map.getEngimonY();
+                Map.getPlayer()->Move(command[0]);
+                int x = Map.getPlayerX();
+                int y = Map.getPlayerY();
+                if (Map.getCellP(y, x)->getEngimon()) {
+                    // Engimon temp(*((Map.getCellP(y, x))->getEngimon()));
+                    // Map.getCellP(AEtemp.GetY(), AEtemp.GetX())->setEngimon(&temp);
+                    Map.setEngimonAt(AEtemp.GetY(), AEtemp.GetX(), Map.getCellP(y, x)->getEngimon());
+                    Map.setEngimonAt(y, x, NULL);
+                    throw (0);
+                }
+            }
+            catch (int) {
+                cout << "Engimon dipindahkan" << endl;
+            }
             Map.viewmap();
             Map.increaseTurn();
             Map.spawnEnemy(G.first);

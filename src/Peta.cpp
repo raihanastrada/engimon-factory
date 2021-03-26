@@ -71,6 +71,17 @@ Cell Peta::getCell(int i, int j) {
         cout << "error: " << e << endl;
     }
 }
+Cell* Peta::getCellP(int i, int j) {
+    try
+    {
+        this->isValidIdx(i,j);
+        return &cell[i][j];
+    }
+    catch(string e)
+    {
+        cout << "error: " << e << endl;
+    }
+}
 const int Peta::getMinLvl() {
     return this->minLvl;
 }
@@ -102,6 +113,9 @@ void Peta::setEngimonCount(int count) {
 }
 void Peta::increaseTurn() {
     turn += 1;
+}
+void Peta::setEngimonAt(int i, int j, Engimon *e){
+    cell[i][j].setEngimon(e);
 }
 
 void Peta::viewmap() {
