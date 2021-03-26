@@ -200,7 +200,7 @@ class Engimon : public Engidex::Species {
             id = engimon_count;
             engimon_count++;
             name = getSpeciesName();
-            skills.push_back(getUniqueSkill());
+            // skills.push_back(getUniqueSkill());
             exp = 0;
             level = 0;
             alive = true;
@@ -266,14 +266,26 @@ class Engimon : public Engidex::Species {
         bool addSkill(Skill newSkill)
         {
             if (!newSkill.isCompatible(elements)) { cout << "SkillItem not compatible with " << name << endl; return false; }
+            // if (newSkill.getMasteryLevel())
             if (skills.size() < 4 && (find(skills.begin(), skills.end(), newSkill) == skills.end()))
             {
                 skills.push_back(newSkill);
                 cout << name << " learnt a new skill!" << endl; 
                 return true;
             } else {
-                cout << name << " already has 4 skills" << endl;
-                return false;
+                if (find(skills.begin(), skills.end(), newSkill) != skills.end()) { cout << name << " already knows that skill" << endl; return false; }
+                int x;
+                cout << name << " already has 4 skills, choose a skill to replace: " << endl;
+                for (int i = 0; i < skills.size(); i++) {
+                    cout << (i + 1) << ". " << skills.at(i).getName() << endl;
+                }
+                cout << endl << "Skill to replace: ";
+                cin >> x;
+                if ((x - 1) < 0 || (x - 1) >= skills.size()) {cout << "Input not valid" << endl; return false;}
+                skills.erase(skills.begin() + (x - 1));
+                skills.push_back(newSkill);
+                cout << "Skill replaced, " << name << " learnt a new skill!" << endl;
+                return true;
             }
         };
 

@@ -111,7 +111,7 @@ void Player::PrintEngimonMenu() {
     cin >> index;
     if ((index - 1) < 0 || (index - 1) >= InvE.GetCount()) { cout << "Input not valid" << endl; return; }
     cout << "Engimon Detail: " << endl;
-    InvE.GetItemByIdx(index)->PrintInfo(); // TEST harusnya PrintDetail
+    InvE.GetItemByIdx(index - 1)->PrintDetail();
 }
 
 // Menggunakan skill item pada InvS[indexS] ke Engimon pada InvE[indexE]
@@ -134,7 +134,7 @@ void Player::UseSkillItemMenu() {
     cout << "Choose Engimon to use SkillItem on: ";
     cin >> indexE;
     if ((indexE - 1) < 0 || (indexE - 1) >= InvE.GetCount()) { cout << "Input Engimon not valid" << endl; return; }
-    UseSkillItem(indexS, indexE);
+    UseSkillItem(indexS - 1, indexE - 1);
 }
 
 // Mengembalikan true jika Inventory full, false jika tidak TEST
