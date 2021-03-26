@@ -13,8 +13,17 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 	}
 	
 	// level bapak ibu kurang 30
-	dad.level(dad.getLevel-30);
-	mom.level(mom.getLevel-30);
+	dad.setLevel(dad.getLevel()-30);
+	mom.setLevel(mom.getLevel()-30);
+	int possibleId[72] = 
+	{1001,1002,1003,1004,1005,1006,1007,1008,1009,
+	 2001,2002,2003,2004,2005,2006,2007,2008,2009,
+	 3001,3002,3003,3004,3005,3006,3007,3008,3009,
+	 4001,4002,4003,4004,4005,4006,4007,4008,4009,
+	 5001,5002,5003,5004,5005,5006,5007,5008,5009,
+	 1201,1202,1203,1204,1205,1206,1207,1208,1209,
+	 5301,5302,5303,5304,5305,5306,5307,5308,5309,
+	 5401,5402,5403,5404,5405,5406,5407,5408,5409};
 	
 	// construct default engimon
 	Engimon* anak = new Engimon();
@@ -47,7 +56,8 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 				anak = hold;
 			}
 			else {
-				id_anak = rand() % 9000 + 1000;
+				int idx_possibleId = rand() % 72;
+				id_anak = possibleId[idx_possibleId];
 				Engimon* hold = new Engimon(e, id_anak);
 				anak = hold;
 			}
@@ -79,7 +89,8 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 				anak = hold;
 			}
 			else {
-				id_anak = rand() % 9000 + 1000;
+				int idx_possibleId = rand() % 72;
+				id_anak = possibleId[idx_possibleId];
 				Engimon* hold = new Engimon(e, id_anak);
 				anak = hold;
 			}
@@ -111,7 +122,8 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 				anak = hold;
 			}
 			else {
-				id_anak = rand() % 9000 + 1000;
+				int idx_possibleId = rand() % 72;
+				id_anak = possibleId[idx_possibleId];
 				Engimon* hold = new Engimon(e, id_anak);
 				anak = hold;
 			}
@@ -144,7 +156,8 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 				anak = hold;
 			}
 			else {
-				id_anak = rand() % 9000 + 1000;
+				int idx_possibleId = rand() % 72;
+				id_anak = possibleId[idx_possibleId];
 				Engimon* hold = new Engimon(e, id_anak);
 				anak = hold;
 			}
@@ -157,17 +170,19 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 	cout<<"Namain anaknye bang"<<endl;
 	cin>>name;
 	anak->setName(name);
-	anak->parents[0] = &dad;
-	anak->parents[1] = &mom;
+	anak->setParents(&dad, &mom);
 	
 	// set skill anak selain unique skill
-	int slotted_skill = 1;
-	int current_skill = 1;
-	
 	// set skill anak = skill bapak selama constraint memenuhi
-	for (int i=1;i<4;i++) {
-		if ()
+	for (int i=0;i<4;i++) {
+		anak->addSkillBreed(dad.skills.at(i));
 	}
+	
+	//set skill anak = skill ibu selama constraint memenuhi
+	for (int i=0;i<4;i++) {
+		anak->addSkillBreed(mom.skills.at(i));
+	}
+
 //	anak.skills[0] = anak.uniqueSkill; // slot pertama skill reserved for species unique skill
 //	// skill anak
 //		
