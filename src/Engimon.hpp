@@ -130,13 +130,13 @@ class Engidex {
         void addSpecies(string name, int id, Skill u, Element a1, Element a2)
         {
             Species s(name, id, u, a1, a2);
-            codex[id] = s;
+            codex.insert(make_pair(id, s));
         };
 
         void addSpecies(string name, int id, Skill u, string a1, string a2)
         {
             Species s(name, id, u, Element(a1), Element(a2));
-            codex[id] = s;
+            codex.insert(make_pair(id, s));
         };
 
         void addSpecies(string name, int id, Skill u, Element a1)
@@ -148,13 +148,13 @@ class Engidex {
         void addSpecies(string name, int id, Skill u, string a1)
         {
             Species s(name, id, u, Element(a1));
-            codex[id] = s;
+            codex.insert(make_pair(id, s));
         };
 
         void addSpecies(string name, int id, Skill u, vector<Element> a)
         {
             Species s(name, id, u, a);
-            codex[id] = s;
+            codex.insert(make_pair(id, s));
         }
 
         // friend void addNewEntry(string name, int code, )

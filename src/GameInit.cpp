@@ -23,11 +23,11 @@ void GameInitiator::addNewEntry(int id, string name, string skillname, Element a
 void GameInitiator::addNewEntry(int id, string name, string skillname)
 {
     vector<Element> elements;
-    elements.push_back(el[id/1000]);
+    elements.push_back(el[(id/1000)-1]);
     int i = (id / 100) % 10;
     if (i != 0)
     {
-        elements.push_back(el[i]);
+        elements.push_back(el[i-1]);
     }    
 
     mt19937 rng((unsigned long long)new char); // pseudo-random generator untuk base power
@@ -73,7 +73,7 @@ pair<Engidex, CatalogSkill> GameInitiator::init()
     // Initialize Pokemon Species
     /*
     FORMAT:
-        Skill skill(basepower, masterlevel, vector<Element> compatibleElement);
+        Skill skill(basepower, masterlevel, vector<Element> compatibleElement)
         Engidex::addSpecies(name, id, skill, elementName) (you can use string for el name)
     */
 
