@@ -63,7 +63,7 @@ class Peta
         /* Spawn engimon */
         void spawnEnemy(Engidex e);
         /* Mengenerate random engimon */
-        Engimon generateEngimon(Engidex e);
+        // Engimon generateEngimon(Engidex e);
         /* Move engimon dari cell c1 ke cell c2 */        
         void moveEngimon(Cell c1, Cell c2);
         /* Mengecek apakah engimon valid bergerak ke cell */

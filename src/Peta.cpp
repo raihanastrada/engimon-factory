@@ -191,9 +191,18 @@ void Peta::spawnEnemy(Engidex e) {
         Element electric("Electric");
         Element ground("Ground");
         Element ice("Ice");
-        Engimon engiEnemy = this->generateEngimon(e);
+        int possibleId[72] = 
+        {1001,1002,1003,1004,1005,1006,1007,1008,1009,
+        2001,2002,2003,2004,2005,2006,2007,2008,2009,
+        3001,3002,3003,3004,3005,3006,3007,3008,3009,
+        4001,4002,4003,4004,4005,4006,4007,4008,4009,
+        5001,5002,5003,5004,5005,5006,5007,5008,5009,
+        1201,1202,1203,1204,1205,1206,1207,1208,1209,
+        5301,5302,5303,5304,5305,5306,5307,5308,5309,
+        5401,5402,5403,5404,5405,5406,5407,5408,5409};
+        Engimon *engiEnemy = new Engimon(e, possibleId[rand() % 72]);
         int i,j;
-        if (engiEnemy.getElements().at(0) == water || engiEnemy.getElements().at(0) == ice)
+        if (engiEnemy->getElements().at(0) == water || engiEnemy->getElements().at(0) == ice)
         {
             do
             {
@@ -209,42 +218,42 @@ void Peta::spawnEnemy(Engidex e) {
                 i = random(GRS_MIN_Y, GRS_MAX_Y);
             } while (isPlayers(i,j) && cell[i][j].getEngimon() != NULL && (j >= SEA_MIN_X && j <= SEA_MAX_X && i >= SEA_MIN_Y && i <= SEA_MAX_Y));
         }
-        cell[i][j].setEngimon(&engiEnemy);
+        cell[i][j].setEngimon(engiEnemy);
         this->engimonCount -= 1;
-        cout << "Telah muncul sebuah "<< engiEnemy.getName() << "di titik ("<<j<<","<<i<<")" << endl;
+        cout << "Telah muncul sebuah "<< engiEnemy->getName() << "di titik ("<<j<<","<<i<<")" << endl;
     }
 }
-Engimon Peta::generateEngimon(Engidex e) {
-    int possibleId[72] = 
-	{1001,1002,1003,1004,1005,1006,1007,1008,1009,
-	 2001,2002,2003,2004,2005,2006,2007,2008,2009,
-	 3001,3002,3003,3004,3005,3006,3007,3008,3009,
-	 4001,4002,4003,4004,4005,4006,4007,4008,4009,
-	 5001,5002,5003,5004,5005,5006,5007,5008,5009,
-	 1201,1202,1203,1204,1205,1206,1207,1208,1209,
-	 5301,5302,5303,5304,5305,5306,5307,5308,5309,
-	 5401,5402,5403,5404,5405,5406,5407,5408,5409};
-    return Engimon(e, possibleId[rand() % 72]);
-    // int firstElmt = this->random(1,5);
-    // int secondElmt = 0;
-    // if (firstElmt == 5) // Kalo water bisa W,G / W,I / W
-    // {
-    //     secondElmt = this->random(0,1); // Water
-    //     if (secondElmt) {secondElmt = this->random(3,4);} // W,G atau W,I
-    // }
-    // else if (firstElmt == 1)
-    // {
-    //     secondElmt = this->random(0,1); // E
-    //     if (secondElmt) {secondElmt = 2;} // E,F
-    // }
-    // int idx = this->random(1,10);
-    // int id = firstElmt*1000 + secondElmt*100 + idx;
-    // // pair<Engidex, CatalogSkill> e = this->GI;
-    // Engimon engiEnemy(e, id);
-    // // line(77777)
-    // // engiEnemy.PrintDetail();
-    // return engiEnemy;
-}
+// Engimon Peta::generateEngimon(Engidex* e) {
+//     int possibleId[72] = 
+// 	{1001,1002,1003,1004,1005,1006,1007,1008,1009,
+// 	 2001,2002,2003,2004,2005,2006,2007,2008,2009,
+// 	 3001,3002,3003,3004,3005,3006,3007,3008,3009,
+// 	 4001,4002,4003,4004,4005,4006,4007,4008,4009,
+// 	 5001,5002,5003,5004,5005,5006,5007,5008,5009,
+// 	 1201,1202,1203,1204,1205,1206,1207,1208,1209,
+// 	 5301,5302,5303,5304,5305,5306,5307,5308,5309,
+// 	 5401,5402,5403,5404,5405,5406,5407,5408,5409};
+//     return Engimon(*e, possibleId[rand() % 72]);
+//     // int firstElmt = this->random(1,5);
+//     // int secondElmt = 0;
+//     // if (firstElmt == 5) // Kalo water bisa W,G / W,I / W
+//     // {
+//     //     secondElmt = this->random(0,1); // Water
+//     //     if (secondElmt) {secondElmt = this->random(3,4);} // W,G atau W,I
+//     // }
+//     // else if (firstElmt == 1)
+//     // {
+//     //     secondElmt = this->random(0,1); // E
+//     //     if (secondElmt) {secondElmt = 2;} // E,F
+//     // }
+//     // int idx = this->random(1,10);
+//     // int id = firstElmt*1000 + secondElmt*100 + idx;
+//     // // pair<Engidex, CatalogSkill> e = this->GI;
+//     // Engimon engiEnemy(e, id);
+//     // // line(77777)
+//     // // engiEnemy.PrintDetail();
+//     // return engiEnemy;
+// }
 
 void Peta::moveEngimon(Cell c1, Cell c2) {
     c2.setEngimon(c1.getEngimon());
