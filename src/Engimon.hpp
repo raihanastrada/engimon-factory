@@ -44,8 +44,8 @@ class Engidex {
 
         Engidex& operator=(const Engidex &e)
         {
-            Engidex *res = new Engidex(e);
-            return *res;
+            codex = e.codex;
+            return *this;
         }
 
         class Species {
@@ -119,8 +119,13 @@ class Engidex {
 
                 Species& operator=(const Species& sp)
                 {
-                    Species *res = new Species(sp);
-                    return *res;
+                    if (this != &sp){
+                        species_name = sp.species_name;
+                        species_id = sp.species_id;
+                        skills = sp.skills;
+                        elements = sp.elements;
+                    }
+                    return *this;
                 };
 
                 bool operator==( Species sp2 ) { return species_id == sp2.species_id; };
@@ -220,8 +225,17 @@ class Engimon : public Engidex::Species {
 
         Engimon& operator=(const Engimon &e)
         {
-            Engimon *res = new Engimon(e);
-            return *res;
+            if (this != &e){
+                Species::operator=(e);
+                id = e.id;
+                name = e.name;
+                parents = e.parents;
+                skills = e.skills;
+                exp = e.exp;
+                level = e.level;
+                alive = e.alive;
+            }
+            return *this;
         }
 
         ~Engimon()
@@ -262,7 +276,8 @@ class Engimon : public Engidex::Species {
                 exp = MAX_EXP;
                 alive = false;
             } else {
-                if ((exp + getExp()) > 100)
+                exp += new_exp;
+                if ((new_exp + getExp()) > 100)
                 {
                     level++;
                 }

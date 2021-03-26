@@ -327,6 +327,11 @@ void Peta::battle(){
         int gacha = rng()%(int)enemy_elements.size();
         player.InsertSkillItem(catalogSkill.getRandomSkillByElement(enemy_elements[gacha]));
         delete enemy;
+        int gacha_exp = rng()%99 + 1;
+        player.getActiveEngimon()->addExp(gacha_exp);
+        if (!player.getActiveEngimon()->getAlive()){
+            player.KillActive();
+        }
         // gatau perlu setCell apa enggak
     }
     else{
