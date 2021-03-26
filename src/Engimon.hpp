@@ -234,6 +234,17 @@ class Engimon : public Engidex::Species {
         {   
             name = new_name;
         };
+        
+        void setLevel(int new_level)
+        {
+        	level = new_level;
+		}
+		
+		void setParents(Engimon* dad, Engimon* mom)
+		{
+			parents.push_back(dad);
+			parents.push_back(mom);
+		}
 
         /* GETTERS */
         bool    getAlive()              { return alive; };
@@ -288,7 +299,51 @@ class Engimon : public Engidex::Species {
                 return true;
             }
         };
-
+		
+		void addSkillBreed(Skill newSkill)
+		{
+			if (newSkill.isCompatible(elements)) {
+				if (skills.size() < 4 && (find(skills.begin(), skills.end(), newSkill) == skills.end())) {
+					skills.push_back(newSkill);
+				}
+				else if (skills.size() == 4) {
+					vector<Skill> temp;
+					for (int i=1;i<skills.size();i++) {
+						if (skills[i]<newSkill) {
+							temp.push_back(skills.at(i));
+							skills.erase(skills.begin() + i);
+							skills.push_back(newSkill);
+							break;
+						}
+					}
+					if (temp.size()>0) { // cek seluruh skill lagi
+						for (int i=1;i<skills.size();i++) {
+							sort(temp.rbegin(),temp.rend());
+							if (skills.at(i)<temp.at(0)) {
+								temp.push_back(skills.at(i));
+								skills.erase(skills.begin() + i);
+								skills.push_back(temp.at(0));
+								temp.erase(temp.begin() + 0);
+							}
+						}
+					}
+				}
+				else if (find(skills.begin(), skills.end(), newSkill) != skills.end()) {
+					for (int i=1;i<skills.size();i++) {
+						if (skills.at(i) == newSkill) {
+							if (skills.at(i).getMasteryLevel() == newSkill.getMasteryLevel()) {
+								skills.at(i).setMasteryLevel(skills.at(i).getMasteryLevel());
+							}
+							else if (skills.at(i) < newSkill) {
+								skills.erase(skills.begin() + i);
+								skills.push_back(newSkill);
+							}
+						}
+					}
+				}
+			}
+		}
+		
         void PrintDetail() {
             cout << "Details: " << endl;
             PrintInfo(); cout << endl;
@@ -325,7 +380,7 @@ class Engimon : public Engidex::Species {
         bool operator==(Engimon comp) { return id == comp.id; };
 
         /* FRIEND FUNCTIONS */
-        friend Engimon breed(Engimon dad, Engimon mom); // for breeding
+        friend Engimon breed(Engimon dad, Engimon mom, Engidex e); // for breeding
 };
 
 #endif
