@@ -92,6 +92,31 @@ void Player::PrintListSkillItem() {
     InvS.PrintAll(); // ganti format method printall, semua item harus punya printinfo
 }
 
+void Player::BreedingMenu(Engidex Engi) {
+    if (IsInventoryFull()) { cout << "Inventory full" << endl; return; }
+    int idx1, idx2;
+    cout << "First Engimon" << endl;
+    PrintListEngimon();
+    cout << "Choose First Engimon: ";
+    cin >> idx1;
+    if ((idx1 - 1) < 0 || (idx1 - 1) >= InvE.GetCount()) { cout << "Input not valid" << endl; return; }
+    cout << "Second Engimon" << endl;
+    PrintListEngimon();
+    cout << "Choose Second Engimon: ";
+    cin >> idx2;
+    if ((idx2 - 1) < 0 || (idx2 - 1) >= InvE.GetCount()) { cout << "Input not valid" << endl; return; }
+    try {
+        Engimon anak = breed(InvE.GetItemByIdx(idx1 - 1), InvE.GetItemByIdx(idx2 - 1), Engi);
+        InsertEngimon(anak);
+    }
+    catch (bool e) {
+        cout << "You cannot breed with yourself" << endl;
+    }
+    catch (int i) {
+        cout << "Your Engimon's too weak to breed" << endl;
+    }
+}
+
 // Interaksi dengan Active Engimon
 void Player::Interact() {
     string name = ActiveEngimon->getName();

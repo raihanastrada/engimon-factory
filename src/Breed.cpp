@@ -4,17 +4,17 @@
 
 using namespace std;
 
-Engimon breed(Engimon dad, Engimon mom, Engidex e) {
-	if (dad == mom) {
+Engimon breed(Engimon* dad, Engimon* mom, Engidex e) {
+	if (*dad == *mom) {
 		throw false; // exception bikin anak ma diri sendiri
 	}
-	if (dad.getLevel()<31 || mom.getLevel()<31) { 
+	if (dad->getLevel()<31 || mom->getLevel()<31) { 
 		throw 0; // exception level bapak ibu lower than 31
 	}
 	
 	// level bapak ibu kurang 30
-	dad.setLevel(dad.getLevel()-30);
-	mom.setLevel(mom.getLevel()-30);
+	dad->setLevel(dad->getLevel()-30);
+	mom->setLevel(mom->getLevel()-30);
 	int possibleId[72] = 
 	{1001,1002,1003,1004,1005,1006,1007,1008,1009,
 	 2001,2002,2003,2004,2005,2006,2007,2008,2009,
@@ -29,8 +29,8 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 	Engimon* anak = new Engimon();
 	
 	// set elemen dan spesies anak
-	int id_bapak = dad.getEngidexID();
-	int id_ibu = mom.getEngidexID();
+	int id_bapak = dad->getEngidexID();
+	int id_ibu = mom->getEngidexID();
 	int id_anak;
 	if ((id_bapak/100)%10 == 0 && (id_ibu/100)%10 == 0) { // bapak dan ibu single elemen
 	
@@ -170,17 +170,17 @@ Engimon breed(Engimon dad, Engimon mom, Engidex e) {
 	cout<<"Namain anaknye bang"<<endl;
 	cin>>name;
 	anak->setName(name);
-	anak->setParents(&dad, &mom);
+	anak->setParents(dad, mom);
 	
 	// set skill anak selain unique skill
 	// set skill anak = skill bapak selama constraint memenuhi
-	for (int i=0;i<4;i++) {
-		anak->addSkillBreed(dad.skills.at(i));
+	for (int i=0;i<dad->getSkills().size();i++) {
+		anak->addSkillBreed(dad->getSkills().at(i));
 	}
 	
 	//set skill anak = skill ibu selama constraint memenuhi
-	for (int i=0;i<4;i++) {
-		anak->addSkillBreed(mom.skills.at(i));
+	for (int i=0;i<mom->getSkills().size();i++) {
+		anak->addSkillBreed(mom->getSkills().at(i));
 	}
 
 //	anak.skills[0] = anak.uniqueSkill; // slot pertama skill reserved for species unique skill

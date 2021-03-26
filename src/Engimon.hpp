@@ -15,6 +15,7 @@ using namespace std;
 
 // ENGIMON DIES AT LEVEL 100.
 #define MAX_EXP 100 * 100 
+#define LINEx(n) cout << "------" << n << "------" << endl;
 
 /*
 ENGIDEX code format
@@ -213,7 +214,7 @@ class Engimon : public Engidex::Species {
             parents = e.parents;
             skills = e.skills;
             exp = e.exp;
-            level = 0;
+            level = e.level;
             alive = e.alive;
         }
 
@@ -329,10 +330,10 @@ class Engimon : public Engidex::Species {
 					}
 				}
 				else if (find(skills.begin(), skills.end(), newSkill) != skills.end()) {
-					for (int i=1;i<skills.size();i++) {
+					for (int i=0;i<skills.size();i++) {
 						if (skills.at(i) == newSkill) {
 							if (skills.at(i).getMasteryLevel() == newSkill.getMasteryLevel()) {
-								skills.at(i).setMasteryLevel(skills.at(i).getMasteryLevel());
+								skills.at(i).setMasteryLevel(skills.at(i).getMasteryLevel() + 1);
 							}
 							else if (skills.at(i) < newSkill) {
 								skills.erase(skills.begin() + i);
@@ -354,6 +355,10 @@ class Engimon : public Engidex::Species {
             cout << "Skills: ";
             for (int i = 0; i < skills.size(); i++) {
                 cout << skills.at(i).getName();
+                cout << " MLvl: ";
+                cout << skills.at(i).getMasteryLevel();
+                cout << " BPow: ";
+                cout << skills.at(i).getBasePower();
                 if (i != skills.size() - 1) { cout << ", "; } 
             }
             cout << endl;
@@ -380,7 +385,7 @@ class Engimon : public Engidex::Species {
         bool operator==(Engimon comp) { return id == comp.id; };
 
         /* FRIEND FUNCTIONS */
-        friend Engimon breed(Engimon dad, Engimon mom, Engidex e); // for breeding
+        friend Engimon breed(Engimon* dad, Engimon* mom, Engidex e); // for breeding
 };
 
 #endif

@@ -39,8 +39,7 @@ class Player {
         void PrintEngimonMenu(); // Print detail suatu Engimon (menampilkan nama parent beserta spesies mereka) serta seluruh atribut kelas
         void UseSkillItem(int indexS, int indexE); // Menggunakan skill item pada suatu engimon
         void UseSkillItemMenu(); // Menu menggunakan skill item
-        void Breeding(); // Melaksanakan breeding antara 2 engimon
-        void Battle(); // Melakukan battle dengan suatu engimon yang berada di dekatnya (adjacent tiles)
+        void BreedingMenu(Engidex Engi); // Melaksanakan breeding antara 2 engimon
         // Petak kiri, kanan, atas, dan bawah (tampilkan detail engimon lawan ke layar)
         void Interact(); // Mengecek Active Engimon
         bool IsInventoryFull(); // Mengecek jika inventory full
