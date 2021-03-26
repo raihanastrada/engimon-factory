@@ -287,7 +287,7 @@ bool Peta::isValidIdx(int i, int j) {
 int Peta::random(int min, int max) {
     return experimental::randint(min, max);
 }
-bool Peta::battle(){
+bool Peta::battle(CatalogSkill &catalog_skill){
     // cari adjacent wild engimon
     // prioritas adjacent engimon yang dipilih random
     vector<int> dx = {1, 0, -1, 0}, dy = {0, 1, 0, -1};
@@ -299,12 +299,14 @@ bool Peta::battle(){
     pair<int, int> wild_engimon_cell_coordinate = make_pair(-1, -1);
     for (auto &coord : adjacent_cell_coordinates){
         int x = coord.first, y = coord.second;
-        if (x >= 0 && y >= 0 && x <= 11 && y <= 9 && cell[x][y].getEngimon()){
+        if (x >= 0 && y >= 0 && x <= 11 && y <= 9 && cell[y][x].getEngimon()){
             // ada engimon di (x, y)
             wild_engimon_cell_coordinate = coord;
         }
     }
 
+    // cout << "player di: " << getPlayerY() << " " << getPlayerX() << "\n";
+    // cout << "engimon lawan di " << wild_engimon_cell_coordinate.second << " " << wild_engimon_cell_coordinate.first << "\n";
     if (wild_engimon_cell_coordinate == make_pair(-1, -1)){
         // tidak ada adjacent wild engimon, throw error code 1
         throw 1;
@@ -317,8 +319,8 @@ bool Peta::battle(){
     cout << "\n";
 
     // ngitung sama nampilin power
-    // Battle::printPower(*player.getActiveEngimon(), *enemy);
-    bool playerWins = Battle::comparePower(*player.getActiveEngimon(), *enemy);
+    Battle::printPower(player.getActiveEngimon(), enemy);
+    bool playerWins = Battle::comparePower(player.getActiveEngimon(), enemy);
     bool ret = true; // return value battle, defaultnya true karena nggak game over
 
     if (playerWins){
@@ -327,15 +329,22 @@ bool Peta::battle(){
         cout << "Engimonmu menang!\n";
         if (!player.IsInventoryFull()){
             player.InsertEngimon(*enemy);
+            line(1)
             vector<Element> enemy_elements = enemy->getElements();
+            line(2)
+            cout << "elemen enemy ada " << enemy_elements.size() << "\n";
             int gacha = rng()%(int)enemy_elements.size();
-            Skill randomSkill = catalogSkill.getRandomSkillByElement(enemy_elements[gacha]);
+            Skill randomSkill = catalog_skill.getRandomSkillByElement(enemy_elements[gacha]);
+            line(3)
             player.InsertSkillItem(randomSkill);
-            delete enemy;
+            line(4)
             cout << "Kamu mendapatkan engimon ";
             enemy->PrintInfo();
             cout << "\nKamu mendapatkan skill ";
-            randomSkill.PrintInfo(); 
+            randomSkill.PrintInfo();
+            tmp.setEngimon(nullptr);
+            delete enemy;
+            line(5)
         }
         int gacha_exp = rng()%99 + 1;
         player.getActiveEngimon()->addExp(gacha_exp);

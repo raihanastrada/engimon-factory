@@ -111,7 +111,7 @@ int main() {
         }
         if (command == "battle") {
             try {
-                if (Map.battle() == false) {
+                if (Map.battle(G.second) == false) {
                     cout << "GAME OVER" << endl;
                     running = false;
                 }

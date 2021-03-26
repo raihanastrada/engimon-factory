@@ -19,11 +19,11 @@ using namespace std;
 class Battle{
 public:
 	// menampilkan power level pada pertarungan antara active dengan wild
-	static void printPower(Engimon active, Engimon wild);
+	static void printPower(Engimon *active, Engimon *wild);
 
 	// komparator power dua engimon
 	// mengembalikan true jika power engimon active tidak lebih kecil dari power engimon 
-	static bool comparePower(Engimon active, Engimon wild);
+	static bool comparePower(Engimon *active, Engimon *wild);
 };
 
 #endif
