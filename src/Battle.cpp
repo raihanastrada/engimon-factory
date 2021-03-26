@@ -2,7 +2,7 @@
 
 #include "Battle.h"
 
-static void printPower(Engimon active, Engimon wild){
+void Battle::printPower(Engimon active, Engimon wild){
 	float power_active, power_wild;
 	power_active = active.getLevel()*getAdvantage(active.getElements(), wild.getElements());
 	for (Skill s : active.getSkills()) power_active += s.getBasePower()*s.getMasteryLevel();
