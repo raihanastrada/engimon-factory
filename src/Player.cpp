@@ -49,6 +49,10 @@ Player::~Player() { delete this->ActiveEngimon; }
 
 // Menggerakkan Player (input W, A, S, D)
 void Player::Move(char direction) {
+    if (Location.GetX() == 11 && (direction == 'D' || direction == 'd')) { cout << "You've reached the end of the map" << endl; return; }
+    if (Location.GetX() == 0 && (direction == 'A' || direction == 'a')) { cout << "You've reached the end of the map" << endl; return; }
+    if (Location.GetY() == 0 && (direction == 'W' || direction == 'w')) { cout << "You've reached the end of the map" << endl; return; }
+    if (Location.GetY() == 9 && (direction == 'S' || direction == 's')) { cout << "You've reached the end of the map" << endl; return; }
     this->EngimonLocation = this->Location; // Active Engimon berpindah tempat ke lokasi Player
     if (direction == 'W' || direction == 'w') { this->Location.MoveUp(); }
     else if (direction == 'A' || direction == 'a') { this->Location.MoveLeft(); }
@@ -73,6 +77,7 @@ void Player::SwitchActive(int index) { ActiveEngimon = InvE.GetItemByIdx(index);
 
 // Menu mengganti active Engimon
 void Player::SwitchActiveMenu() {
+    cout << "Current Active Engimon: "; CheckActive();
     int input;
     cout << "Inventory Engimon: " << endl;
     PrintListEngimon();
@@ -89,6 +94,7 @@ void Player::PrintListEngimon() {
 
 // Memperlihatkan isi Inventory Skill Item
 void Player::PrintListSkillItem() {
+    if (InvS.GetCount() == 0) { cout << "Inventory SkillItem empty" << endl; return; }
     InvS.PrintAll(); // ganti format method printall, semua item harus punya printinfo
 }
 
@@ -124,7 +130,7 @@ void Player::Interact() {
     for (int i=0; i<min(4, (int)name.length()); i++) slogan.push_back(name[i]);
     slogan += slogan;
     
-    cout << '[' << name << "]: " << slogan << "\n";
+    cout << '[' << name << "]: " << slogan << "?!?!?" << "\n";
 }
 
 // Print detail suatu Engimon (menampilkan nama parent beserta spesies mereka) serta seluruh atribut kelas

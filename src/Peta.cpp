@@ -46,6 +46,8 @@ Peta::Peta(string filename, int _engimonCount, Player _player, int _minLvl) : mi
         readfile.close();
         this->engimonCount = _engimonCount;
         this->player = _player;
+        GameInitiator G;
+        this->GI = G.init();
     }
 }
 
@@ -90,6 +92,9 @@ int Peta::getEngimonY() {
 Player* Peta::getPlayer() {
     return &(this->player);
 }
+Engidex* Peta::getEngidex() {
+    return &((this->GI).first); /////////
+}
 
 void Peta::setCell(Cell c, int i, int j) {
     Cell cell = getCell(i,j);
@@ -122,10 +127,10 @@ void Peta::viewmap() {
             else
             {
                 cell[i][j].show(this->minLvl);
-                if (j == 11)
-                {
-                    cout << endl;
-                }
+            }
+            if (j == 11)
+            {
+                cout << endl;
             }
         }
     }
@@ -227,7 +232,7 @@ Engimon Peta::generateEngimon() {
     }
     int idx = this->random(1,10);
     int id = firstElmt*1000 + secondElmt*100 + idx;
-    pair<Engidex, CatalogSkill> e = this->GI.init();
+    pair<Engidex, CatalogSkill> e = this->GI;
     Engimon engiEnemy(e.first, id);
     return engiEnemy;
 }

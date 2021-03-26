@@ -30,7 +30,7 @@ class Peta
         Player player;              // Player, buat ngambil lokasi player
         CatalogSkill catalogSkill;  // catalog skill [NOTE belum diconstruct]
         static int turn;            // Turn
-        GameInitiator GI;
+        pair<Engidex, CatalogSkill> GI;
         
     public:
         /* Ctor */
@@ -47,6 +47,7 @@ class Peta
         int getEngimonX();
         int getEngimonY();
         Player* getPlayer();
+        Engidex* getEngidex();
         
         // Setter
         /* Set cell pada Cell[i][j] */
