@@ -1,7 +1,10 @@
-#include "Peta.h"
+#include "Cell.h"
 #include "Player.h"
 #include "Engimon.hpp"
 #include "Elements.hpp"
+#include "Battle.h"
+#include "GameInit.hpp"
+#include "Peta.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -56,11 +59,15 @@ Peta::~Peta() {
 }
         
 Cell Peta::getCell(int i, int j) {
-    if (isValidIdx(i,j))
+    try
     {
-        throw "invalid index";
+        this->isValidIdx(i,j);
+        return cell[i][j];
     }
-    return cell[i][j];
+    catch(string e)
+    {
+        cout << "error: " << e << endl;
+    }
 }
 const int Peta::getMinLvl() {
     return this->minLvl;
@@ -80,17 +87,13 @@ int Peta::getEngimonX() {
 int Peta::getEngimonY() {
     return this->player.getEngimonLocation().GetY();
 }
+Player* Peta::getPlayer() {
+    return &(this->player);
+}
 
 void Peta::setCell(Cell c, int i, int j) {
-    try
-    {
-        Cell cell = getCell(i,j);
-        cell = c;
-    }
-    catch(string e)
-    {
-        cout << "error: " << e << endl;
-    }
+    Cell cell = getCell(i,j);
+    cell = c;
 }
 void Peta::setEngimonCount(int count) {
     this->engimonCount = count;
@@ -157,26 +160,78 @@ void Peta::randomMove() {
                 if (cell[i][j].getEngimon() != NULL)
                 {
                     int rngI, rngJ;
-                    do
+                    try
                     {
-                        rngI = random(-1,1);
-                        rngJ = random(-1,1);
-                    } while (!isValidIdx(i+rngI,j+rngJ) && sqrt(pow(i-(i+rngI),2) + pow(j-(j+rngJ),2)) > 1 && !isValidMove(cell[i][j].getEngimon(),cell[i+rngI][j+rngJ]) && !isPlayers(i+rngI,j+rngJ));
-                    Cell c = getCell(rngI,rngJ);
-                    moveEngimon(cell[i][j],c);
+                        do
+                        {
+                            rngI = random(-1,1);
+                            rngJ = random(-1,1);
+                            isValidIdx(i+rngI,j+rngJ);
+                        } while (sqrt(pow(i-(i+rngI),2) + pow(j-(j+rngJ),2)) > 1 && !isValidMove(cell[j][i].getEngimon(),cell[i+rngI][j+rngJ]) && isPlayers(i+rngI,j+rngJ) && cell[i+rngI][j+rngJ].getEngimon() != NULL);
+                        Cell c = getCell(i+rngI,j+rngJ);
+                        moveEngimon(cell[i][j],c);
+                    }
+                    catch(string e)
+                    {
+                        cout << "terjadi error: " << e << "saat " << cell[i][j].getEngimon()->getName() << "di ("<<j<<","<<i<<") ingin bergerak" << endl;
+                    }
                 }
             }
         }
     }
 }
 void Peta::spawnEnemy() {
-    if (this->engimonCount != 0)
+    if (this->engimonCount != 0 && turn%4 == 0)
     {
         /* Cuma bisa spawn kalo masih ada jatah buat engimon */
-        cout << "spawnEnemy" << endl;
+        Element fire("Fire");
+        Element water("Water");
+        Element electric("Electric");
+        Element ground("Ground");
+        Element ice("Ice");
+        Engimon engiEnemy = this->generateEngimon();
+        int i,j;
+        if (engiEnemy.getElements().at(0) == water || engiEnemy.getElements().at(0) == ice)
+        {
+            do
+            {
+                j = random(SEA_MIN_X, SEA_MAX_X);
+                i = random(SEA_MIN_Y, SEA_MAX_Y);
+            } while (isPlayers(i,j) && cell[i][j].getEngimon() != NULL);
+        }
+        else 
+        {
+            do
+            {
+                j = random(GRS_MIN_X, GRS_MAX_X);
+                i = random(GRS_MIN_Y, GRS_MAX_Y);
+            } while (isPlayers(i,j) && cell[i][j].getEngimon() != NULL && (j >= SEA_MIN_X && j <= SEA_MAX_X && i >= SEA_MIN_Y && i <= SEA_MAX_Y));
+        }
+        cell[i][j].setEngimon(&engiEnemy);
         this->engimonCount -= 1;
+        cout << "Telah muncul sebuah "<< engiEnemy.getName() << "di titik ("<<j<<","<<i<<")" << endl;
     }
 }
+Engimon Peta::generateEngimon() {
+    int firstElmt = this->random(1,5);
+    int secondElmt = 0;
+    if (firstElmt == 5) // Kalo water bisa W,G / W,I / W
+    {
+        secondElmt = this->random(0,1); // Water
+        if (secondElmt) {secondElmt = this->random(3,4);} // W,G atau W,I
+    }
+    else if (firstElmt == 1)
+    {
+        secondElmt = this->random(0,1); // E
+        if (secondElmt) {secondElmt = 2;} // E,F
+    }
+    int idx = this->random(1,10);
+    int id = firstElmt*1000 + secondElmt*100 + idx;
+    pair<Engidex, CatalogSkill> e = this->GI.init();
+    Engimon engiEnemy(e.first, id);
+    return engiEnemy;
+}
+
 void Peta::moveEngimon(Cell c1, Cell c2) {
     c2.setEngimon(c1.getEngimon());
     c1.setEngimon(NULL);
@@ -187,28 +242,27 @@ bool Peta::isValidMove(Engimon* engimon, Cell c) {
     Element electric("Electric");
     Element ground("Ground");
     Element ice("Ice");
-    if (engimon->getElements().at(0) == water || engimon->getElements().at(1) == water || engimon->getElements().at(0) == ice || engimon->getElements().at(1) == ice)
+    if (engimon->getElements().at(0) == water || engimon->getElements().at(0) == ice)
     {
-        if ( (engimon->getElements().at(0) == water && engimon->getElements().at(1) == ground) || (engimon->getElements().at(0) == ground && engimon->getElements().at(1) == water) )
-        {
-            return (c.getType() == "sea" || c.getType() == "grassland");
-        }
         // Jika ada elemen es atau water, bisa berjalan di air
+        if (engimon->getElements().at(1) == ground) 
+        {return (c.getType() == "sea" || c.getType() == "grassland");}
         return c.getType() == "sea";
     }
-    else
-    {
-        return c.getType() == "grassland";
-    }
+    else{return c.getType() == "grassland";}
 }
 bool Peta::isPlayers(int i, int j) {
-    return j != getPlayerX() && i != getPlayerY() && j != getEngimonX() && i != getEngimonY();
+    return j == getPlayerX() || i == getPlayerY() || j == getEngimonX() && i == getEngimonY();
 }
 bool Peta::isValidIdx(int i, int j) {
-    return !(i < 0 || i > 9 || j < 0 || j > 11);
+    if (i < 0 || i > 9 || j < 0 || j > 11)
+    {
+        throw "invalid idx";
+    }
+    return true;
 }
 int Peta::random(int min, int max) {
-    experimental::randint(min, max);
+    return experimental::randint(min, max);
 }
 void Peta::battle(){
     // cari adjacent wild engimon

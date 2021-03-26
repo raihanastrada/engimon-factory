@@ -6,8 +6,18 @@
 #include "Engimon.hpp"
 #include "Elements.hpp"
 #include "Battle.h"
+#include "GameInit.hpp"
 #include <string>
 #include <experimental/random>
+
+#define SEA_MIN_X 6
+#define SEA_MAX_X 11
+#define SEA_MIN_Y 0
+#define SEA_MAX_Y 5
+#define GRS_MIN_X 0
+#define GRS_MAX_X 11
+#define GRS_MIN_Y 0
+#define GRS_MAX_Y 9
 
 using namespace std;
 
@@ -20,6 +30,7 @@ class Peta
         Player player;              // Player, buat ngambil lokasi player
         CatalogSkill catalogSkill;  // catalog skill [NOTE belum diconstruct]
         static int turn;            // Turn
+        GameInitiator GI;
         
     public:
         /* Ctor */
@@ -35,7 +46,8 @@ class Peta
         int getPlayerY();
         int getEngimonX();
         int getEngimonY();
-
+        Player* getPlayer();
+        
         // Setter
         /* Set cell pada Cell[i][j] */
         void setCell(Cell c, int i, int j);
@@ -51,7 +63,9 @@ class Peta
         void randomMove();
         /* Spawn engimon */
         void spawnEnemy();
-        /* Move engimon dari cell c1 ke cell c2 */
+        /* Mengenerate random engimon */
+        Engimon generateEngimon();
+        /* Move engimon dari cell c1 ke cell c2 */        
         void moveEngimon(Cell c1, Cell c2);
         /* Mengecek apakah engimon valid bergerak ke cell */
         bool isValidMove(Engimon* engimon, Cell c);
