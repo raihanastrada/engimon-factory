@@ -40,6 +40,17 @@ int main() {
     cout << "Selamat datang di dunia engimon gambar di atas merupakan peta dari dunia Engimon" << endl;
     cout << "Tuliskan command '-help' untuk mengetahui list command yang dapat digunakan, selamat berpetualang "+playerName+"!" << endl;
     Map.getPlayer()->InsertEngimon(Engimon(G.first, 3001)); // Insert first engimon
+    //
+    Engimon a(G.first, 2008);
+    Engimon b(G.first, 3009);
+    Engimon c(G.first, 4001);
+    a.setLevel(77);
+    b.setLevel(77);
+    c.setLevel(77);
+    Map.getPlayer()->InsertEngimon(a);
+    Map.getPlayer()->InsertEngimon(b);
+    Map.getPlayer()->InsertEngimon(c);
+    //
     Map.getPlayer()->SwitchActive(0); // Inisialisasi ActiveEngimon
     running = true;
 
@@ -48,15 +59,10 @@ int main() {
         cout << ">> ";
         cin >> command;
         if (command.length() == 1 && (command[0] == 'W' || command[0] == 'A' || command[0] == 'S' || command[0] == 'D' || command[0] == 'w' || command[0] == 'a' || command[0] == 's' || command[0] == 'd')) {
-            LINEE(0)
             Map.getPlayer()->Move(command[0]);
-            LINEE(1)
             Map.viewmap();
-            LINEE(2)
             Map.increaseTurn();
-            LINEE(3)
             Map.spawnEnemy(G.first);
-            LINEE(4)
         }
         if (command == "inventory") {
             string cmd;
@@ -72,8 +78,47 @@ int main() {
             }
             else { cout << "Input tidak valid" << endl; }
         }
+        // switch active engimon
+        if (command == "switch") {
+            Map.getPlayer()->SwitchActiveMenu();
+        }
         if (command == "interact") {
             Map.getPlayer()->Interact();
+        }
+        if (command == "use") {
+            Map.getPlayer()->UseSkillItemMenu();
+        }
+        if (command == "breed") {
+            Map.getPlayer()->BreedingMenu(G.first);
+        }
+        if (command == "detail") {
+            Map.getPlayer()->PrintEngimonMenu();
+        }
+        if (command == "-help") {
+            cout << "List of commands untuk bermain:" << endl;
+            cout << "inventory untuk melihat inventory" << endl;
+            cout << "switch untuk mengganti active Engimon" << endl;
+            cout << "w,a,s,d untuk berjalan pada map" << endl;
+            cout << "interact untuk interaksi dengan active Engimon" << endl;
+            cout << "exit untuk keluar dari game" << endl; 
+            cout << "battle untuk battle dengan Engimon" << endl;
+            cout << "use untuk menggunakan skill item pada Engimon yang berada di inventory" << endl;
+            cout << "detail untuk melihat detail dari Engimon yang dimiliki" << endl;
+            cout << "breed untuk melakukan breeding antar Engimon pada Inventory" << endl;
+        }
+        if (command == "kill") {
+            Map.getPlayer()->KillActive();
+        }
+        if (command == "battle") {
+            try {
+                if (Map.battle() == false) {
+                    cout << "GAME OVER" << endl;
+                    running = false;
+                }
+            }
+            catch (int) {
+                cout << "Tidak terdapat Engimon di sekitar Anda" << endl;
+            }
         }
         if (command == "exit")
         {
